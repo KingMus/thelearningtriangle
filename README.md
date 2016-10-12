@@ -1,7 +1,9 @@
 # thelearningtriangle
 The Learning Triangle is going to be a evolving simulation in an specific environment.
 <br />
+<br />
 Maven build-configurations:<br />
+<p>
   For compiling the project with all dependencies:
  <br />
     Name:           LearningTriangleCleanCompile<br />
@@ -12,3 +14,4 @@ Maven build-configurations:<br />
     Name:           TheLearningTriangle<br />
     Base directory: ${workspace_loc:/TheLearningTriangle}<br />
     Goals:          install       <br />
+</p>
