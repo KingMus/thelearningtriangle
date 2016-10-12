@@ -4,8 +4,7 @@ The Learning Triangle is going to be a evolving simulation in an specific enviro
 <br />
 Maven build-configurations:<br />
 <p>
-  For compiling the project with all dependencies:
- <br />
+  For compiling the project with all dependencies:<br />
     Name:           LearningTriangleCleanCompile<br />
     Base directory: ${workspace_loc:/TheLearningTriangle}<br />
     Goals:          clean test compile assembly:single<br />
