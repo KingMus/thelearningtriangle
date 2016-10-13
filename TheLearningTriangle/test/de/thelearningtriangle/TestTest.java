@@ -38,6 +38,7 @@ public class TestTest
     public void mockitoMockWhenThenReturnTest() throws Exception
     {
         // you can mock concrete classes, not only interfaces
+        @SuppressWarnings("unchecked")
         LinkedList<String> mockedList = mock(LinkedList.class);
         
         // stubbing appears before the actual execution
