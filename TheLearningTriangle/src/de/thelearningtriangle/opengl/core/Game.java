@@ -1,5 +1,6 @@
 package de.thelearningtriangle.opengl.core;
 
+import java.awt.Font;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -14,6 +15,7 @@ import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.Animator;
+import com.jogamp.opengl.util.awt.TextRenderer;
 
 public class Game extends JFrame implements GLEventListener, KeyListener
 {
@@ -53,9 +55,14 @@ public class Game extends JFrame implements GLEventListener, KeyListener
     @Override
     public void display(GLAutoDrawable drawable)
     {
+        TextRenderer renderer = new TextRenderer(new Font("Arial", Font.ITALIC, 50));
         testBox.calculatePosition();
         GL2 gl = drawable.getGL().getGL2();
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
+        
+        renderer.beginRendering(drawable.getSurfaceWidth(), drawable.getSurfaceHeight());
+        renderer.draw("" + canvas.getAnimator().getUpdateFPSFrames(), 50, drawable.getSurfaceHeight() - 50);
+        renderer.endRendering();
         
         gl.glColor3f(1, 0, 0);
         
@@ -65,6 +72,7 @@ public class Game extends JFrame implements GLEventListener, KeyListener
             float ratio = (float) WINDOW_WIDTH / (float) WINDOW_HEIGHT;
             gl.glVertex3f(position[0] / ratio, position[1], position[2]);
         }
+        
         gl.glLoadIdentity();
         
         gl.glEnd();
