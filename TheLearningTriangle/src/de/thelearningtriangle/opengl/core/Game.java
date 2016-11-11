@@ -1,13 +1,11 @@
 package de.thelearningtriangle.opengl.core;
 
-import java.awt.Font;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
 import com.jogamp.opengl.GL2;
-import com.jogamp.opengl.GL2ES3;
 import com.jogamp.opengl.GL4;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLCapabilities;
@@ -15,9 +13,8 @@ import com.jogamp.opengl.GLEventListener;
 import com.jogamp.opengl.GLProfile;
 import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.util.Animator;
-import com.jogamp.opengl.util.awt.TextRenderer;
 
-public class Game extends JFrame implements GLEventListener, KeyListener
+public class Game extends JFrame implements GLEventListener
 {
     private static final int WINDOW_WIDTH = 800;
     private static final int WINDOW_HEIGHT = 600;
@@ -25,8 +22,8 @@ public class Game extends JFrame implements GLEventListener, KeyListener
      * 
      */
     private static final long serialVersionUID = -1313675494223113008L;
-    private TestBox testBox;
     private GLCanvas canvas;
+    private List<DrawableFigure> drawableFigures;
     
     public Game()
     {
@@ -37,9 +34,6 @@ public class Game extends JFrame implements GLEventListener, KeyListener
         canvas = new GLCanvas(capabilities);
         canvas.addGLEventListener(this);
         canvas.setFocusable(true);
-        canvas.addKeyListener(this);
-        
-        testBox = new TestBox(0.2f, 0.2f);
         
         this.getContentPane().add(canvas);
         
@@ -50,41 +44,25 @@ public class Game extends JFrame implements GLEventListener, KeyListener
         this.setResizable(false);
         canvas.requestFocus();
         
+        drawableFigures = new ArrayList<DrawableFigure>();
     }
     
     @Override
     public void display(GLAutoDrawable drawable)
     {
-        TextRenderer renderer = new TextRenderer(new Font("Arial", Font.ITALIC, 50));
-        testBox.calculatePosition();
         GL2 gl = drawable.getGL().getGL2();
         gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
         
-        renderer.beginRendering(drawable.getSurfaceWidth(), drawable.getSurfaceHeight());
-        renderer.draw("" + canvas.getAnimator().getUpdateFPSFrames(), 50, drawable.getSurfaceHeight() - 50);
-        renderer.endRendering();
-        
         gl.glColor3f(1, 0, 0);
-        
-        gl.glBegin(GL2ES3.GL_TRIANGLES);
-        for (float[] position : testBox.getVertex3fs())
+        for (DrawableFigure drawableFigure : drawableFigures)
         {
-            float ratio = (float) WINDOW_WIDTH / (float) WINDOW_HEIGHT;
-            gl.glVertex3f(position[0] / ratio, position[1], position[2]);
+            drawableFigure.drawFigureWith(drawable);
         }
-        
-        gl.glLoadIdentity();
-        
-        gl.glEnd();
-        
-        gl.glFlush();
     }
     
     @Override
     public void dispose(GLAutoDrawable drawable)
     {
-        // TODO Auto-generated method stub
-        
     }
     
     @Override
@@ -100,33 +78,18 @@ public class Game extends JFrame implements GLEventListener, KeyListener
         canvas.setAnimator(animator);
     }
     
+    public void registerDrawableFigure(DrawableFigure drawableFigure)
+    {
+        this.drawableFigures.add(drawableFigure);
+    }
+    
+    public void unregisterDrawableFigure(DrawableFigure drawableFigure)
+    {
+        this.drawableFigures.remove(drawableFigure);
+    }
+    
     @Override
     public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height)
     {
-        // TODO Auto-generated method stub
-        
-    }
-    
-    public void play()
-    {
-        // TODO Auto-generated method stub
-        
-    }
-    
-    @Override
-    public void keyTyped(KeyEvent e)
-    {
-    }
-    
-    @Override
-    public void keyPressed(KeyEvent e)
-    {
-        testBox.keyEventAction(e, true);
-    }
-    
-    @Override
-    public void keyReleased(KeyEvent e)
-    {
-        testBox.keyEventAction(e, false);
     }
 }
