@@ -10,5 +10,5 @@ Scenario: Display the score
 	
 Scenario: Add score in highscore list 
 	Given the score is calculated 
-	When the score is higher then the last entry of the highscore list 
+	When the score is higher than the last entry of the highscore list 
 	Then add score to correct position in highscore list

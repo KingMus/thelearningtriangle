@@ -16,7 +16,7 @@ Scenario: Poison Field
 	
 Scenario: Energy Field 
 	Given I want to move in any direction 
-	When I would move on a energy field 
+	When I would move on an energy field 
 	Then I move forward 
 	And my energy becomes higher 
 	
