@@ -1,4 +1,4 @@
-package de.thelearningtriangle.opengl.core;
+package de.thelearningtriangle.opengl.figure;
 
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
