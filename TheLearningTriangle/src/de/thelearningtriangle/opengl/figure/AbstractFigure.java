@@ -73,7 +73,7 @@ public abstract class AbstractFigure implements DrawableFigure
         float surfaceHeight = (float) drawable.getSurfaceHeight();
         float ratio = surfaceWidth / surfaceHeight;
         
-        float[][] rotatedVectors = calculateRotatedTriangle();
+        float[][] rotatedVectors = calculateRotatedObject();
         
         GL2 gl = drawable.getGL().getGL2();
         
@@ -90,11 +90,11 @@ public abstract class AbstractFigure implements DrawableFigure
     }
     
     /**
-     * This function calculates the rotation of the triangle
+     * This function calculates the rotation of the object
      * 
      * @param rotation
      */
-    private float[][] calculateRotatedTriangle()
+    private float[][] calculateRotatedObject()
     {
         float[][] rotatedVectors = new float[this.vectors.length][];
         
