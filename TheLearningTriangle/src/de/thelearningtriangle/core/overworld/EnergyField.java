@@ -2,7 +2,7 @@ package de.thelearningtriangle.core.overworld;
 
 import de.thelearningtriangle.core.LearningTriangle;
 
-public class EnergyField extends Field
+public class EnergyField extends AbstractField
 {
 	private float energy = 50.f;
 	

@@ -2,7 +2,7 @@ package de.thelearningtriangle.core.overworld;
 
 import de.thelearningtriangle.core.LearningTriangle;
 
-public class DeathField extends Field
+public class DeathField extends AbstractField
 {
 	
 	public DeathField()
@@ -13,7 +13,7 @@ public class DeathField extends Field
 	@Override
 	protected void accessEvent(LearningTriangle learningTriangle)
 	{
-		float minDeathAmount = (learningTriangle.getEnergy() + 1) * (-1);
-		learningTriangle.addEnergy(minDeathAmount);
+		float deathEnergyAmount = (learningTriangle.getEnergy() + 1) * (-1);
+		learningTriangle.addEnergy(deathEnergyAmount);
 	}
 }

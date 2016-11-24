@@ -2,7 +2,7 @@ package de.thelearningtriangle.core.overworld;
 
 import de.thelearningtriangle.core.LearningTriangle;
 
-public class NormalField extends Field
+public class NormalField extends AbstractField
 {
 	
 	public NormalField()

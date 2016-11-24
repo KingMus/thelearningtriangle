@@ -3,12 +3,12 @@ package de.thelearningtriangle.core.overworld;
 public class Overworld
 {
 	private int size;
-	private Field[][] overworldMatrix;
+	private AbstractField[][] overworldMatrix;
 	
 	public Overworld(int size)
 	{
 		this.size = size;
-		this.overworldMatrix = new Field[size][size];
+		this.overworldMatrix = new AbstractField[size][size];
 	}
 	
 	public int getSize()
@@ -16,7 +16,7 @@ public class Overworld
 		return this.size;
 	}
 	
-	public Field[][] getOverworldMatrix()
+	public AbstractField[][] getOverworldMatrix()
 	{
 		return this.overworldMatrix;
 	}

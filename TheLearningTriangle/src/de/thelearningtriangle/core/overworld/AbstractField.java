@@ -2,11 +2,11 @@ package de.thelearningtriangle.core.overworld;
 
 import de.thelearningtriangle.core.LearningTriangle;
 
-public abstract class Field
+public abstract class AbstractField
 {
 	private FieldType fieldType;
 	
-	protected Field(FieldType fieldType)
+	protected AbstractField(FieldType fieldType)
 	{
 		this.fieldType = fieldType;
 	}
