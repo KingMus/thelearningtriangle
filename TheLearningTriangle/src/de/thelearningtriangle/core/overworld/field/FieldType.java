@@ -1,24 +1,32 @@
 package de.thelearningtriangle.core.overworld.field;
 
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public enum FieldType
 {
-	NORMAL(NormalField.class, 60),
-	WALL(WallField.class, 70),
-	POISON(PoisonField.class, 75),
-	DEATH(DeathField.class, 80),
-	ENERGY(EnergyField.class, 100);
+	NORMAL(NormalField.class, Color.GRAY, 80),
+	WALL(WallField.class, Color.BLACK, 85),
+	POISON(PoisonField.class, Color.PINK, 90),
+	DEATH(DeathField.class, Color.RED, 95),
+	ENERGY(EnergyField.class, Color.YELLOW, 100);
 	
 	private Class<? extends AbstractField> fieldClass;
 	private int chance;
+	private Color color;
 	
-	private FieldType(Class<? extends AbstractField> fieldClass, int chance)
+	private FieldType(Class<? extends AbstractField> fieldClass, Color color, int chance)
 	{
 		this.fieldClass = fieldClass;
 		this.chance = chance;
+		this.color = color;
+	}
+	
+	public Color getColor()
+	{
+		return this.color;
 	}
 	
 	public AbstractField createNewFieldInstance()
@@ -38,11 +46,10 @@ public enum FieldType
 	{
 		List<FieldType> collectedFieldsSortedAndWithoutToHighFields = Arrays.stream(values())
 				.sorted((f1, f2) -> Integer.compare(f1.chance, f2.chance))
-				.filter(field -> field.chance < randomNumber)
+				.filter(field -> field.chance >= randomNumber)
 				.collect(Collectors.toList());
 		
-		int lastElement = collectedFieldsSortedAndWithoutToHighFields.size() - 1;
-		FieldType fieldType = collectedFieldsSortedAndWithoutToHighFields.get(lastElement);
+		FieldType fieldType = collectedFieldsSortedAndWithoutToHighFields.get(0);
 		
 		return fieldType;
 	}

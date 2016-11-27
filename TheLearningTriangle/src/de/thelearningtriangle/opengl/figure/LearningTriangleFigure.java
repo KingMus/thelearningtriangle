@@ -1,5 +1,7 @@
 package de.thelearningtriangle.opengl.figure;
 
+import java.awt.Color;
+
 import com.jogamp.opengl.GL2ES3;
 import com.jogamp.opengl.fixedfunc.GLMatrixFunc;
 
@@ -22,7 +24,7 @@ public class LearningTriangleFigure extends AbstractFigure
 	 */
 	public LearningTriangleFigure(float posX, float posY)
 	{
-		super(GLMatrixFunc.GL_MODELVIEW, GL2ES3.GL_TRIANGLES);
+		super(GLMatrixFunc.GL_MODELVIEW, GL2ES3.GL_TRIANGLES, Color.BLUE);
 		this.posX = posX;
 		this.posY = posY;
 		setFigureVectors(getBaseVectors());

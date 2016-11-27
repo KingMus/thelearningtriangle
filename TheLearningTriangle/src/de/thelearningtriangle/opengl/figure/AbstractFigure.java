@@ -1,5 +1,7 @@
 package de.thelearningtriangle.opengl.figure;
 
+import java.awt.Color;
+
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 
@@ -14,13 +16,16 @@ public abstract class AbstractFigure implements DrawableFigure
 	protected float posX;
 	protected float posY;
 	
-	protected AbstractFigure(int glMatrixFuncMode, int gl2es3Mode)
+	protected Color color;
+	
+	protected AbstractFigure(int glMatrixFuncMode, int gl2es3Mode, Color color)
 	{
 		this.glMatrixFuncMode = glMatrixFuncMode;
 		this.gl2es3Mode = gl2es3Mode;
 		this.vectors = new float[0][0];
 		this.posX = 0f;
 		this.posY = 0f;
+		this.color = color;
 	}
 	
 	/**
@@ -75,6 +80,8 @@ public abstract class AbstractFigure implements DrawableFigure
 		float[][] rotatedVectors = calculateRotatedObject();
 		
 		GL2 gl = drawable.getGL().getGL2();
+		
+		gl.glColor3ub((byte) color.getRed(), (byte) color.getGreen(), (byte) color.getBlue());
 		
 		gl.glMatrixMode(glMatrixFuncMode);
 		gl.glLoadIdentity();

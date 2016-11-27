@@ -9,7 +9,7 @@ import de.thelearningtriangle.opengl.figure.FieldFigure;
 public class DrawableOverworld extends Overworld
 {
 	private Game game;
-	private final float constantBorder = 0.9f;
+	private final float constantBorder = 0.95f;
 	private final float twoConstantBorder = 2 * constantBorder;
 	
 	public DrawableOverworld(int size)

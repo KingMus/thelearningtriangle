@@ -12,7 +12,7 @@ public class FieldFigure extends AbstractFigure
 	
 	public FieldFigure(float posX, float posY, float size, FieldType fieldType)
 	{
-		super(GLMatrixFunc.GL_MODELVIEW, GL2.GL_QUADS);
+		super(GLMatrixFunc.GL_MODELVIEW, GL2.GL_QUADS, fieldType.getColor());
 		this.posX = posX;
 		this.posY = posY;
 		this.fieldType = fieldType;
@@ -25,23 +25,22 @@ public class FieldFigure extends AbstractFigure
 	protected float[][] getBaseVectors()
 	{
 		float[][] vectors = new float[4][3];
-		float minusHalfSize = -size / 2f;
-		float plusHalfSize = size / 2f;
+		float minusSize = -size;
 		vectors[0] = new float[]
 		{
-			minusHalfSize, plusHalfSize, 0f
+			minusSize, size, 0f
 		};
 		vectors[1] = new float[]
 		{
-			plusHalfSize, plusHalfSize, 0f
+			size, size, 0f
 		};
 		vectors[2] = new float[]
 		{
-			plusHalfSize, minusHalfSize, 0f
+			size, minusSize, 0f
 		};
 		vectors[3] = new float[]
 		{
-			minusHalfSize, minusHalfSize, 0f
+			minusSize, minusSize, 0f
 		};
 		return vectors;
 	}

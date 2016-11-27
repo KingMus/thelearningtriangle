@@ -54,7 +54,9 @@ public class Game extends JFrame implements GLEventListener
 		GL2 gl = drawable.getGL().getGL2();
 		gl.glClear(GL2.GL_COLOR_BUFFER_BIT | GL2.GL_DEPTH_BUFFER_BIT);
 		
-		gl.glColor3f(1, 0, 0);
+		// gl.glColor3ub((byte) Color.CYAN.getRed(), (byte)
+		// Color.CYAN.getGreen(), (byte) Color.CYAN.getBlue());
+		
 		for (DrawableFigure drawableFigure : drawableFigures)
 		{
 			drawableFigure.drawFigureWith(drawable);
