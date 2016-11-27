@@ -1,4 +1,4 @@
-package de.thelearningtriangle.core.overworld;
+package de.thelearningtriangle.core.overworld.field;
 
 import java.util.Date;
 

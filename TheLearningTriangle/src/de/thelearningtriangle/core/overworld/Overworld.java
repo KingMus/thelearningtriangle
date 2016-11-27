@@ -1,6 +1,8 @@
 package de.thelearningtriangle.core.overworld;
 
-public class Overworld
+import de.thelearningtriangle.core.overworld.field.AbstractField;
+
+public abstract class Overworld
 {
 	private int size;
 	private AbstractField[][] overworldMatrix;
@@ -16,7 +18,7 @@ public class Overworld
 		return this.size;
 	}
 	
-	public AbstractField[][] getOverworldMatrix()
+	protected AbstractField[][] getOverworldMatrix()
 	{
 		return this.overworldMatrix;
 	}

@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class OverworldTest
+public class TrainOverworldTest
 {
-	Overworld underTest = new Overworld(64);
+	Overworld underTest = new TrainOverworld(64);
 	
 	@Test
 	public void createOverworldAndGetItsCorrectSize() throws Exception

@@ -30,6 +30,7 @@ public class Game extends JFrame implements GLEventListener
 	public Game()
 	{
 		super("The Learning Triangle");
+		drawableFigures = new ArrayList<DrawableFigure>();
 		GLProfile profile = GLProfile.get(GLProfile.GL2);
 		GLCapabilities capabilities = new GLCapabilities(profile);
 		
@@ -45,8 +46,6 @@ public class Game extends JFrame implements GLEventListener
 		this.setVisible(true);
 		this.setResizable(false);
 		canvas.requestFocus();
-		
-		drawableFigures = new ArrayList<DrawableFigure>();
 	}
 	
 	@Override
