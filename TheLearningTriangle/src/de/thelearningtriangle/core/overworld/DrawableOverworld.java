@@ -5,6 +5,7 @@ import de.thelearningtriangle.core.overworld.field.FieldType;
 import de.thelearningtriangle.opengl.core.Game;
 import de.thelearningtriangle.opengl.figure.DrawableFigure;
 import de.thelearningtriangle.opengl.figure.FieldFigure;
+import de.thelearningtriangle.opengl.figure.LearningTriangleFigure;
 
 public class DrawableOverworld extends Overworld
 {
@@ -16,6 +17,7 @@ public class DrawableOverworld extends Overworld
     {
         super(size);
         initializeOverworldRowsFor(getFieldMatrix());
+        addTrianlge();
     }
     
     private void initializeOverworldRowsFor(FieldMatrix fieldMatrix)
@@ -43,5 +45,12 @@ public class DrawableOverworld extends Overworld
             DrawableFigure figure = new FieldFigure(fieldPosX, fieldPosY, size, cellFieldType);
             game.registerDrawableFigure(figure);
         }
+    }
+    
+    private void addTrianlge()
+    {
+        float sizeOfSquare = 1.0f / (float) getSize();
+        LearningTriangleFigure triangleFigure = new LearningTriangleFigure(3f * sizeOfSquare, -3f * sizeOfSquare, sizeOfSquare);
+        game.registerDrawableFigure(triangleFigure);
     }
 }

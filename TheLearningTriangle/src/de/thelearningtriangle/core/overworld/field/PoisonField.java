@@ -1,23 +1,21 @@
 package de.thelearningtriangle.core.overworld.field;
 
-import java.util.Date;
-
 import de.thelearningtriangle.core.LearningTriangle;
 
 public class PoisonField extends AbstractField
 {
-    private long poisonTimeInMs;
-    
-    public PoisonField()
-    {
-        super(FieldType.POISON);
-        poisonTimeInMs = 5000; // 5 Seconds
-    }
-    
-    @Override
-    protected void accessEvent(LearningTriangle learningTriangle)
-    {
-        long poisonTime = poisonTimeInMs += new Date().getTime();
-        learningTriangle.setHighConsumptionCycles(poisonTime);
-    }
+	public static final Integer consumption = 10; // can be changed
+	public static final Integer consumptionCycles = 5;
+
+	public PoisonField()
+	{
+		super(FieldType.POISON);
+	}
+
+	@Override
+	protected void accessEvent(LearningTriangle learningTriangle)
+	{
+		learningTriangle.setConsumption(consumption);
+		learningTriangle.setHighConsumptionCycles(consumptionCycles);
+	}
 }

@@ -4,13 +4,13 @@ import de.thelearningtriangle.core.LearningTriangle;
 
 public class EnergyField extends AbstractField
 {
-	private float energy = 50.f;
-	
+	public static final Integer energy = 50;
+
 	public EnergyField()
 	{
 		super(FieldType.ENERGY);
 	}
-	
+
 	@Override
 	protected void accessEvent(LearningTriangle learningTriangle)
 	{

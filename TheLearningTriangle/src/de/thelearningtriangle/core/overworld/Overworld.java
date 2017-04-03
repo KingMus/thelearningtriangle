@@ -14,7 +14,7 @@ public abstract class Overworld
     public Overworld(int size)
     {
         this.size = size;
-        this.overworldFieldMatrix = FieldMatrixFactory.generateOverworldMatixFor(System.currentTimeMillis(), size);
+        this.overworldFieldMatrix = FieldMatrixFactory.generateOverworldMatrixFor(14L, size);
         this.learningTriangles = new ArrayList<LearningTriangle>();
     }
     
