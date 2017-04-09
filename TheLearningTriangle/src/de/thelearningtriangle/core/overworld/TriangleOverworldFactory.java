@@ -5,7 +5,7 @@ import java.util.Random;
 import de.thelearningtriangle.core.overworld.field.AbstractField;
 import de.thelearningtriangle.core.overworld.field.FieldType;
 
-public class OverworldFactory
+public class TriangleOverworldFactory
 {
 	private static Random random;
 

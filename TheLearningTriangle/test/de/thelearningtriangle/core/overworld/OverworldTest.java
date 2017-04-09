@@ -18,21 +18,21 @@ public class OverworldTest
 	@Test
 	public void anOverworldWithSizeOneCanBeCreated() throws Exception
 	{
-		TriangleOverworld overworld = OverworldFactory.generateOverworld(1);
+		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(1);
 		assertThat(overworld.getSize(), CoreMatchers.is(1));
 	}
 
 	@Test
 	public void anOverworldWithSizeTwoCanBeCreated() throws Exception
 	{
-		TriangleOverworld overworld = OverworldFactory.generateOverworld(2);
+		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(2);
 		assertThat(overworld.getSize(), CoreMatchers.is(2));
 	}
 
 	@Test
 	public void outerFieldOfAThreeByThreeOverworldAreWalls() throws Exception
 	{
-		TriangleOverworld overworld = OverworldFactory.generateOverworld(3);
+		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(3);
 		assertTrue(WallField.class.isInstance(overworld.getField(0, 0)));
 		assertTrue(WallField.class.isInstance(overworld.getField(0, 1)));
 		assertTrue(WallField.class.isInstance(overworld.getField(0, 2)));
@@ -48,7 +48,7 @@ public class OverworldTest
 	@Test
 	public void canGetASpawningPoint() throws Exception
 	{
-		TriangleOverworld overworld = OverworldFactory.generateOverworld(100, 1);
+		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(100, 1);
 		Point randomSpawningPoint = overworld.getRandomSpawningPoint();
 		AbstractField field = overworld.getField(randomSpawningPoint.getX(), randomSpawningPoint.getY());
 		assertFalse(WallField.class.isInstance(field));

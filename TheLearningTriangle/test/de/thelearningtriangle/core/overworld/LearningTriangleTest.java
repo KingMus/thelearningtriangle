@@ -1,18 +1,18 @@
 package de.thelearningtriangle.core.overworld;
 
+import static org.junit.Assert.assertThat;
+
 import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 
-import static org.junit.Assert.assertThat;
-
-import de.thelearningtriangle.core.LearningTriangle;
 import de.thelearningtriangle.core.overworld.field.AbstractField;
 import de.thelearningtriangle.core.overworld.field.FieldType;
 import de.thelearningtriangle.core.overworld.field.PoisonField;
+import de.thelearningtriangle.core.triangle.LearningTriangle;
 
 public class LearningTriangleTest
 {
-
+	
 	@Test
 	public void aLearningTriangleLosesEnergyWhenCycle() throws Exception
 	{
@@ -20,24 +20,24 @@ public class LearningTriangleTest
 		triangle.cycle();
 		assertThat(triangle.getEnergy(), CoreMatchers.is(9));
 	}
-
+	
 	@Test(expected = TriangleDeathException.class)
 	public void aLearningTriangleDiesIfItHasNoEnergyLeftInACycle() throws Exception
 	{
 		LearningTriangle triangle = new LearningTriangle(0);
 		triangle.cycle();
 	}
-
+	
 	@Test(expected = TriangleDeathException.class)
 	public void aLearningTriangleDiesAfterOneCircleOnADeathField() throws Exception
 	{
 		LearningTriangle triangle = new LearningTriangle(0);
-
+		
 		AbstractField field = FieldType.DEATH.createNewFieldInstance();
 		field.access(triangle);
 		triangle.cycle();
 	}
-
+	
 	@Test
 	public void aPoisonedTrianlgeHasNormalConsumptionAfterTheSetCycleAmountOfPoisonField() throws Exception
 	{
@@ -50,7 +50,7 @@ public class LearningTriangleTest
 		}
 		assertThat(triangle.getConsumption(), CoreMatchers.is(1));
 	}
-
+	
 	@Test
 	public void aPoisonedTriangleHasCorrectEnergyAfterConsumptionCycle() throws Exception
 	{
@@ -63,5 +63,5 @@ public class LearningTriangleTest
 		}
 		assertThat(triangle.getEnergy(), CoreMatchers.is(950));
 	}
-
+	
 }
