@@ -22,11 +22,12 @@ public class Application
 	{
 		new LinearDirectionClassifier();
 		Game game = new Game();
+		int size = 30;
 		
 		for (int i = 0; i < 2000; i++)
 		{
 			
-			TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(50, random);
+			TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(size, random);
 			List<Integer> visionVectorFor = overworld.getVisionVectorFor(new Point(10, 10));
 			
 			visionVectorFor.stream().map(x -> new StringBuilder().append(x).append(" ").toString()).forEach(System.out::print);
@@ -37,11 +38,11 @@ public class Application
 			List<DrawableFigure> overworldFigures = drawableOverworldFactory.getDrawableFiguresFor(overworld);
 			overworldFigures.stream().forEach(game::registerDrawableFigure);
 			
-			LearningTriangleFigure triangle = new LearningTriangleFigure(0f, 0f, 0.4f);
+			LearningTriangleFigure triangle = new LearningTriangleFigure(0f, 0f, 1.5f/size);
 			game.registerDrawableFigure(triangle);
 			
 			game.canvas.display();
-			Thread.sleep(100);
+			Thread.sleep(10000);
 			
 			overworldFigures.stream().forEach(game::unregisterDrawableFigure);
 			game.unregisterDrawableFigure(triangle);
