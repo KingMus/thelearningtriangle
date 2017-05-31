@@ -3,6 +3,7 @@ package de.thelearningtriangle.core.overworld;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 import com.jogamp.nativewindow.util.Point;
@@ -14,60 +15,59 @@ import de.thelearningtriangle.core.overworld.field.WallField;
 import de.thelearningtriangle.core.triangle.LearningTriangle;
 
 public class TriangleOverworld {
-	private int size;
 
-	private AbstractField[][] field;
+	private Optional<AbstractField[][]> map;
 
 	private List<TrianglePosition> trianglePositions = new ArrayList<TrianglePosition>();
 
 	private Random random;
 
-	public TriangleOverworld(int size) {
-		this(size, new Random());
-	}
-
-	public TriangleOverworld(int size, Random random) {
-		this.size = size;
+	public TriangleOverworld(Random random) {
 		this.random = random;
 	}
 
-	public void setField(AbstractField[][] field) {
-		this.field = field;
+	public void setMap(AbstractField[][] field) {
+		this.map = Optional.of(field);
 	}
 
-	public int getSize() {
-		return size;
+	private AbstractField[][] getMap() throws NoMapException {
+		return map.orElseThrow(NoMapException::new);
 	}
 
-	public AbstractField getField(int x, int y) {
-		return field[x][y];
+	public int getSize() throws NoMapException {
+		return getMap().length;
 	}
 
-	public void setTriangle(int x, int y) throws FieldAccessException {
+	public AbstractField getField(int x, int y) throws NoMapException {
+		return getMap()[x][y];
+	}
+
+	public void setTriangle(int x, int y) throws NoMapException, FieldAccessException {
 		setTriangle(new Point(x, y));
 	}
 
-	public void setTriangle(Point point) throws FieldAccessException {
+	public void setTriangle(Point point) throws NoMapException, FieldAccessException {
 		LearningTriangle learningTriangle = new LearningTriangle();
-		field[point.getX()][point.getY()].access(learningTriangle);
+		getMap()[point.getX()][point.getY()].access(learningTriangle);
 		trianglePositions.add(new TrianglePosition(point, learningTriangle));
 	}
 
-	public Point getRandomSpawningPoint() {
-		List<Point> points = new ArrayList<Point>();
-		for (int y = 0; y < field.length; y++) {
-			AbstractField[] abstractFields = field[y];
+	public Point getRandomSpawningPoint() throws NoMapException {
+		List<Point> possibleSpawningPoints = new ArrayList<Point>();
+		AbstractField[][] currentMap = getMap();
+		for (int y = 0; y < currentMap.length; y++) {
+			AbstractField[] abstractFields = currentMap[y];
 			for (int x = 0; x < abstractFields.length; x++) {
 				AbstractField abstractField = abstractFields[x];
 				if (!((WallField.class.isInstance(abstractField)) | DeathField.class.isInstance(abstractField))) {
-					points.add(new Point(x, y));
+					possibleSpawningPoints.add(new Point(x, y));
 				}
 			}
 		}
-		return points.get(random.nextInt(points.size()));
+		return possibleSpawningPoints.get(random.nextInt(possibleSpawningPoints.size()));
 	}
 
-	public void moveTriangle(TrianglePosition trianglePosition, Direction direction) {
+	public void moveTriangle(TrianglePosition trianglePosition, Direction direction) throws NoMapException {
 		Point point = trianglePosition.getPoint();
 		int x = point.getX();
 		int y = point.getY();
@@ -77,7 +77,7 @@ public class TriangleOverworld {
 
 		try {
 			LearningTriangle learningTriangle = trianglePosition.getLearningTriangle();
-			field[newX][newY].access(learningTriangle);
+			getMap()[newX][newY].access(learningTriangle);
 
 			trianglePositions.remove(trianglePosition);
 			trianglePositions.add(new TrianglePosition(new Point(newX, newY), learningTriangle));
@@ -99,7 +99,7 @@ public class TriangleOverworld {
 				try {
 					field = getField(point.getX() + visionX, point.getY() + visionY);
 				} catch (Exception e) {
-					field = FieldType.WALL.createNewFieldInstance();
+					field = FieldType.WALL.newInstance();
 				} finally {
 					fieldVector.add(FieldType.getIdFor(field));
 				}

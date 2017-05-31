@@ -33,7 +33,7 @@ public class LearningTriangleTest
 	{
 		LearningTriangle triangle = new LearningTriangle(0);
 		
-		AbstractField field = FieldType.DEATH.createNewFieldInstance();
+		AbstractField field = FieldType.DEATH.newInstance();
 		field.access(triangle);
 		triangle.cycle();
 	}
@@ -42,7 +42,7 @@ public class LearningTriangleTest
 	public void aPoisonedTrianlgeHasNormalConsumptionAfterTheSetCycleAmountOfPoisonField() throws Exception
 	{
 		LearningTriangle triangle = new LearningTriangle(1000);
-		AbstractField field = FieldType.POISON.createNewFieldInstance();
+		AbstractField field = FieldType.POISON.newInstance();
 		field.access(triangle);
 		for (int i = 0; i < PoisonField.consumptionCycles + 1; i++)
 		{
@@ -55,7 +55,7 @@ public class LearningTriangleTest
 	public void aPoisonedTriangleHasCorrectEnergyAfterConsumptionCycle() throws Exception
 	{
 		LearningTriangle triangle = new LearningTriangle(1000);
-		AbstractField field = FieldType.POISON.createNewFieldInstance();
+		AbstractField field = FieldType.POISON.newInstance();
 		field.access(triangle);
 		for (int i = 0; i < PoisonField.consumptionCycles; i++)
 		{
