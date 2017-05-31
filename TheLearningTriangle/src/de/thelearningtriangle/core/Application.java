@@ -8,6 +8,7 @@ import com.jogamp.nativewindow.util.Point;
 import de.thelearningtriangle.classifier.LinearDirectionClassifier;
 import de.thelearningtriangle.core.overworld.TriangleOverworld;
 import de.thelearningtriangle.core.overworld.TriangleOverworldFactory;
+import de.thelearningtriangle.core.overworld.TrianglePosition;
 import de.thelearningtriangle.opengl.core.DrawableOverworldFactory;
 import de.thelearningtriangle.opengl.core.Game;
 import de.thelearningtriangle.opengl.figure.DrawableFigure;
@@ -34,18 +35,30 @@ public class Application
 			
 			System.out.println(visionVectorFor.size());
 			
+			overworld.setTriangle(1,1);
+			overworld.setTriangle(1,2);
+			overworld.setTriangle(2,1);
+			overworld.setTriangle(2,2);
+			overworld.setTriangle(3,3);
+			overworld.setTriangle(9,9);
+			
 			DrawableOverworldFactory drawableOverworldFactory = new DrawableOverworldFactory();
 			List<DrawableFigure> overworldFigures = drawableOverworldFactory.getDrawableFiguresFor(overworld);
 			overworldFigures.stream().forEach(game::registerDrawableFigure);
 			
-			LearningTriangleFigure triangle = new LearningTriangleFigure(0f, 0f, 1.5f/size);
-			game.registerDrawableFigure(triangle);
-			
+			for (TrianglePosition position : overworld.getTrianglePositions()) {
+					LearningTriangleFigure triangle = new LearningTriangleFigure((position.getPoint().getX()* (1.9f/size)) - 0.95f, (position.getPoint().getY()*-(1.9f/size)) + 0.95f, 1.5f/size);
+					game.registerDrawableFigure(triangle);
+			}
+
 			game.canvas.display();
-			Thread.sleep(10000);
+			Thread.sleep(1000);
 			
 			overworldFigures.stream().forEach(game::unregisterDrawableFigure);
-			game.unregisterDrawableFigure(triangle);
+			
+			for (DrawableFigure drawableFigure : overworldFigures) {
+				game.unregisterDrawableFigure(drawableFigure);
+			}
 		}
 	}
 }
