@@ -10,6 +10,6 @@ public class WallField extends AbstractField {
 
 	@Override
 	public void access(LearningTriangle learningTriangle) throws FieldAccessException {
-		throw new FieldAccessException();
+//		throw new FieldAccessException();
 	}
 }
