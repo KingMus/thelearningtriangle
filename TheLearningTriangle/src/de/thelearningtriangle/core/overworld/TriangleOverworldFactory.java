@@ -16,7 +16,6 @@ public class TriangleOverworldFactory
 		TriangleOverworldFactory.random = random;
 		
 		TriangleOverworld triangleOverworld = new TriangleOverworld(random);
-		
 		triangleOverworld.setMap(generateField(size));
 		
 		return triangleOverworld;
@@ -24,11 +23,8 @@ public class TriangleOverworldFactory
 	
 	private static AbstractField[][] generateField(int size)
 	{
-		
 		AbstractField[][] field = generateRandomMapMatrixOf(size);
-		
 		setBorder(field);
-		
 		return field;
 	}
 	
