@@ -4,7 +4,7 @@ import de.thelearningtriangle.core.triangle.LearningTriangle;
 
 public class EnergyField extends AbstractField
 {
-	public static final Integer energy = 25;
+	public Integer energy = 25;
 	
 	public EnergyField()
 	{
@@ -15,5 +15,6 @@ public class EnergyField extends AbstractField
 	public void access(LearningTriangle learningTriangle)
 	{
 		learningTriangle.addEnergy(energy);
+		energy = 1;
 	}
 }
