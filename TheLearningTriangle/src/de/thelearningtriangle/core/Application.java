@@ -5,6 +5,7 @@ import java.util.Random;
 
 import com.jogamp.nativewindow.util.Point;
 
+import de.thelearningtriangle.classifier.LinearDirectionClassifier;
 import de.thelearningtriangle.core.overworld.TriangleOverworld;
 import de.thelearningtriangle.core.overworld.TriangleOverworldFactory;
 import de.thelearningtriangle.opengl.core.DrawableOverworldFactory;
@@ -12,31 +13,36 @@ import de.thelearningtriangle.opengl.core.Game;
 import de.thelearningtriangle.opengl.figure.DrawableFigure;
 import de.thelearningtriangle.opengl.figure.LearningTriangleFigure;
 
-public class Application {
-
+public class Application
+{
+	
 	static Random random = new Random(System.currentTimeMillis());
-
-	public static void main(String[] args) throws Exception {
+	
+	public static void main(String[] args) throws Exception
+	{
+		new LinearDirectionClassifier();
 		Game game = new Game();
-
-		for (int i = 0; i < 20; i++) {
-
-			TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(100, random);
+		
+		for (int i = 0; i < 2000; i++)
+		{
+			
+			TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(50, random);
 			List<Integer> visionVectorFor = overworld.getVisionVectorFor(new Point(10, 10));
-			visionVectorFor.stream().map(x -> new StringBuilder().append(x).append(" ").toString())
-					.forEach(System.out::print);
-
-			System.out.println("");
+			
+			visionVectorFor.stream().map(x -> new StringBuilder().append(x).append(" ").toString()).forEach(System.out::print);
+			
+			System.out.println(visionVectorFor.size());
+			
 			DrawableOverworldFactory drawableOverworldFactory = new DrawableOverworldFactory();
 			List<DrawableFigure> overworldFigures = drawableOverworldFactory.getDrawableFiguresFor(overworld);
 			overworldFigures.stream().forEach(game::registerDrawableFigure);
-
+			
 			LearningTriangleFigure triangle = new LearningTriangleFigure(0f, 0f, 0.4f);
 			game.registerDrawableFigure(triangle);
-
+			
 			game.canvas.display();
-			Thread.sleep(2500);
-
+			Thread.sleep(100);
+			
 			overworldFigures.stream().forEach(game::unregisterDrawableFigure);
 			game.unregisterDrawableFigure(triangle);
 		}
