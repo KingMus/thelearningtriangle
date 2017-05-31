@@ -84,28 +84,29 @@ public class TriangleOverworld
 		return possibleSpawningPoints.get(random.nextInt(possibleSpawningPoints.size()));
 	}
 	
+	public Point calculateNewPoint(Point currentPoint, Direction direction)
+	{
+		return new Point(currentPoint.getX() + direction.getChangeInX(), currentPoint.getY() + direction.getChangeInY());
+	}
+	
 	public void moveTriangle(TrianglePosition trianglePosition, Direction direction) throws NoMapException
 	{
-		Point point = trianglePosition.getPoint();
-		int x = point.getX();
-		int y = point.getY();
-		
-		int newX = x + direction.getChangeInX();
-		int newY = y + direction.getChangeInY();
-		
+		Point newPoint = calculateNewPoint(trianglePosition.getPoint(), direction);
 		try
 		{
 			LearningTriangle learningTriangle = trianglePosition.getLearningTriangle();
-			getMap()[newX][newY].access(learningTriangle);
+			getMap()[newPoint.getX()][newPoint.getY()].access(learningTriangle);
 			
 			trianglePositions.remove(trianglePosition);
-			trianglePositions.add(new TrianglePosition(new Point(newX, newY), learningTriangle));
+			trianglePositions.add(new TrianglePosition(newPoint, learningTriangle));
 			
 		}
 		catch (FieldAccessException e)
 		{
-			System.out.println(
-					MessageFormat.format("Triangle at pos [{0},{1}] can''t move in direction: {2}", x, y, direction.name()));
+			System.out.println(MessageFormat.format("Triangle at pos [{0},{1}] can''t move in direction: {2}",
+					newPoint.getX(),
+					newPoint.getY(),
+					direction.name()));
 		}
 	}
 	

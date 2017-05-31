@@ -12,6 +12,7 @@ public enum Direction
 	{
 		this.changeInX = changeInX;
 		this.changeInY = changeInY;
+		this.label = label;
 	}
 	
 	public int getChangeInX()

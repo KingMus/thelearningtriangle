@@ -1,5 +1,6 @@
 package de.thelearningtriangle.qlearning;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.jogamp.nativewindow.util.Point;
@@ -7,6 +8,7 @@ import com.jogamp.nativewindow.util.Point;
 import de.thelearningtriangle.core.overworld.Direction;
 import de.thelearningtriangle.core.overworld.FieldAccessException;
 import de.thelearningtriangle.core.overworld.NoMapException;
+import de.thelearningtriangle.core.overworld.TriangleDeathException;
 import de.thelearningtriangle.core.overworld.TriangleOverworld;
 import de.thelearningtriangle.core.overworld.field.AbstractField;
 import de.thelearningtriangle.core.triangle.LearningTriangle;
@@ -21,67 +23,77 @@ public class RecursiveQTriangle
 		this.overworld = overworld;
 	}
 	
-	public List<TrianlgeMoveData> calculateBestMove(TriangleScoreData data, int depth)
+	public List<TriangleMoveData> calculateBestMoves(Point point, LearningTriangle triangle, int depth) throws NoMapException
 	{
-		LearningTriangle currentTriangle = new LearningTriangle(data.getTriangle());
+		List<TriangleMoveData> bestMoveDataList = new ArrayList<TriangleMoveData>();
+		
+		AbstractField currentField = overworld.getField(point);
+		
 		try
 		{
-			AbstractField field = overworld.getField(data.getPoint());
-			field.access(currentTriangle);
-			long newScore = data.getScore() + currentTriangle.getDistance() + currentTriangle.getEnergy();
-			TriangleScoreData newData = new TriangleScoreData(data.getPoint(), data.getTriangle(), newScore);
+			currentField.access(triangle);
+			triangle.cycle();
+		}
+		// if this exception rises, the triangle tries to access a wall or died.
+		// so punish it for that
+		catch (FieldAccessException | TriangleDeathException e)
+		{
+			TriangleMoveData currentMoveData = new TriangleMoveData();
+			currentMoveData.setScore(-1000);
+			bestMoveDataList.add(currentMoveData);
+			return bestMoveDataList;
+		}
+		
+		if (depth == 0)
+		{
+			TriangleMoveData moveData = new TriangleMoveData();
+			moveData.setScore(triangle.getDistance() + triangle.getEnergy());
+			bestMoveDataList.add(moveData);
+			return bestMoveDataList;
+		}
+		
+		List<Integer> currentVisionVector = overworld.getVisionVectorFor(point);
+		LearningTriangle bestTriangle = null;
+		
+		for (Direction direction : Direction.values())
+		{
+			Point newPoint = overworld.calculateNewPoint(point, direction);
+			LearningTriangle newTriangle = new LearningTriangle(triangle);
 			
-			if (depth == 0)
+			List<TriangleMoveData> thisBestMoves = calculateBestMoves(newPoint, newTriangle, depth - 1);
+			TriangleMoveData thisMove = thisBestMoves.get(0);
+			thisMove.setDirection(direction);
+			thisMove.setVisionVector(currentVisionVector);
+			
+			if (bestMoveDataList.size() == 0)
 			{
-				return null;
+				bestMoveDataList = thisBestMoves;
+				bestTriangle = newTriangle;
 			}
-			for (Direction currentDirection : Direction.values())
+			else
 			{
+				TriangleMoveData lastBestMove = bestMoveDataList.get(0);
 				
+				if (thisMove.getScore() > lastBestMove.getScore())
+				{
+					bestMoveDataList = thisBestMoves;
+					bestTriangle = newTriangle;
+				}
 			}
 		}
-		catch (NoMapException e)
-		{
-			e.printStackTrace();
-		}
-		catch (FieldAccessException e)
-		{
-			e.printStackTrace();
-		}
 		
-		return null;
+		TriangleMoveData currentMoveData = new TriangleMoveData();
+		long newScore = bestMoveDataList.get(0).getScore() + bestTriangle.getDistance() + bestTriangle.getEnergy();
+		currentMoveData.setScore(newScore);
+		
+		List<TriangleMoveData> resultMoveData = new ArrayList<TriangleMoveData>();
+		resultMoveData.add(currentMoveData);
+		resultMoveData.addAll(bestMoveDataList);
+		
+		return resultMoveData;
 	}
 	
-	class TriangleScoreData
-	{
-		private Point point;
-		private LearningTriangle triangle;
-		private long score;
-		
-		public TriangleScoreData(Point point, LearningTriangle triangle, long score)
-		{
-			this.point = new Point(point.getX(), point.getY());
-			this.triangle = new LearningTriangle(triangle);
-			this.score = score;
-		}
-		
-		public Point getPoint()
-		{
-			return point;
-		}
-		
-		public long getScore()
-		{
-			return score;
-		}
-		
-		public LearningTriangle getTriangle()
-		{
-			return triangle;
-		}
-	}
-	
-	class TrianlgeMoveData
+	public static class TriangleMoveData
 	{
 		private Direction direction;
 		private List<Integer> visionVector;
@@ -120,6 +132,10 @@ public class RecursiveQTriangle
 		@Override
 		public String toString()
 		{
+			if (direction == null)
+			{
+				return "undefined\n";
+			}
 			StringBuilder stringBuilder = new StringBuilder().append(direction.getLabel()).append(",");
 			visionVector.stream().forEach(vv -> stringBuilder.append(vv + ","));
 			int lastIndexOfSeperator = stringBuilder.lastIndexOf(",");
