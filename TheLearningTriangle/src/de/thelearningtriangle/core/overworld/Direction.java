@@ -2,12 +2,13 @@ package de.thelearningtriangle.core.overworld;
 
 public enum Direction
 {
-	NORTH(0, 1), EAST(1, 0), SOUTH(0, -1), WEST(-1, 0);
+	NORTH(0, 1, 0), EAST(1, 0, 1), SOUTH(0, -1, 2), WEST(-1, 0, 3);
 	
 	private int changeInX;
 	private int changeInY;
+	private int label;
 	
-	private Direction(int changeInX, int changeInY)
+	private Direction(int changeInX, int changeInY, int label)
 	{
 		this.changeInX = changeInX;
 		this.changeInY = changeInY;
@@ -21,5 +22,10 @@ public enum Direction
 	public int getChangeInY()
 	{
 		return changeInY;
+	}
+	
+	public int getLabel()
+	{
+		return label;
 	}
 }

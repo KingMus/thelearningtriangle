@@ -4,14 +4,22 @@ import de.thelearningtriangle.core.overworld.TriangleDeathException;
 
 public class LearningTriangle
 {
-	private int totalEnergy;
+	private long totalEnergy;
 	private int consumption;
 	private int highConsumptionCycles;
-	private int distance;
+	private long distance;
 	
 	public LearningTriangle()
 	{
-		this(500);
+		this(20);
+	}
+	
+	public LearningTriangle(LearningTriangle baseTriangle)
+	{
+		this.totalEnergy = baseTriangle.totalEnergy;
+		this.consumption = baseTriangle.consumption;
+		this.highConsumptionCycles = baseTriangle.highConsumptionCycles;
+		this.distance = baseTriangle.distance;
 	}
 	
 	public LearningTriangle(int startingEnergy)
@@ -21,17 +29,17 @@ public class LearningTriangle
 		highConsumptionCycles = 0;
 	}
 	
-	public void addEnergy(int energy)
+	public void addEnergy(long energy)
 	{
 		this.totalEnergy += energy;
 	}
 	
-	public int getEnergy()
+	public long getEnergy()
 	{
 		return totalEnergy;
 	}
 	
-	public int getDistance()
+	public long getDistance()
 	{
 		return distance;
 	}

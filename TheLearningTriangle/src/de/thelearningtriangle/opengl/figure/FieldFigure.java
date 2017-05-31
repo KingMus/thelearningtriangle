@@ -7,7 +7,6 @@ import de.thelearningtriangle.core.overworld.field.FieldType;
 
 public class FieldFigure extends AbstractFigure
 {
-	private FieldType fieldType;
 	private float size;
 	
 	public FieldFigure(float posX, float posY, float size, FieldType fieldType)
@@ -15,7 +14,6 @@ public class FieldFigure extends AbstractFigure
 		super(GLMatrixFunc.GL_MODELVIEW, GL2.GL_QUADS, fieldType.getColor());
 		this.posX = posX;
 		this.posY = posY;
-		this.fieldType = fieldType;
 		this.size = size;
 		setFigureVectors(getBaseVectors());
 		// TODO: Do something with the fieldType field
