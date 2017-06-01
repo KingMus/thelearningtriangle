@@ -3,8 +3,6 @@ package de.thelearningtriangle.core;
 import java.util.List;
 import java.util.Random;
 
-import com.jogamp.nativewindow.util.Point;
-
 import de.thelearningtriangle.core.overworld.FieldAccessException;
 import de.thelearningtriangle.core.overworld.TriangleOverworld;
 import de.thelearningtriangle.core.overworld.TriangleOverworldFactory;
@@ -29,13 +27,6 @@ public class Application
 			try
 			{
 				TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(size, random);
-				List<Integer> visionVectorFor = overworld.getVisionVectorFor(new Point(10, 10));
-				
-				visionVectorFor.stream()
-						.map(x -> new StringBuilder().append(x).append(" ").toString())
-						.forEach(System.out::print);
-				
-				System.out.println(visionVectorFor.size());
 				
 				for (int ix = 0; ix < 5; ix++)
 				{

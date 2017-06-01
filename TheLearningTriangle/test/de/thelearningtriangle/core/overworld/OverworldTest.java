@@ -4,7 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-import java.util.List;
 import java.util.Random;
 
 import org.hamcrest.CoreMatchers;
@@ -15,8 +14,6 @@ import com.jogamp.nativewindow.util.Point;
 import de.thelearningtriangle.core.overworld.field.AbstractField;
 import de.thelearningtriangle.core.overworld.field.DeathField;
 import de.thelearningtriangle.core.overworld.field.WallField;
-import de.thelearningtriangle.core.triangle.LearningTriangle;
-import de.thelearningtriangle.qlearning.RecursiveQTriangle;
 
 public class OverworldTest
 {
@@ -60,16 +57,5 @@ public class OverworldTest
 		AbstractField field = overworld.getField(randomSpawningPoint.getX(), randomSpawningPoint.getY());
 		assertFalse(WallField.class.isInstance(field));
 		assertFalse(DeathField.class.isInstance(field));
-	}
-	
-	@Test
-	public void testName() throws NoMapException
-	{
-		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(100, random);
-		Point randomSpawningPoint = overworld.getRandomSpawningPoint();
-		RecursiveQTriangle qTriangle = new RecursiveQTriangle(overworld);
-		LearningTriangle triangle = new LearningTriangle();
-		List<RecursiveQTriangle.TriangleMoveData> bestMoves = qTriangle.calculateBestMoves(randomSpawningPoint, triangle, 12);
-		bestMoves.stream().forEach(System.out::print);
 	}
 }
