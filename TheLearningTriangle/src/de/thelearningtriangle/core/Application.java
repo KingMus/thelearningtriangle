@@ -1,9 +1,14 @@
 package de.thelearningtriangle.core;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import de.thelearningtriangle.core.overworld.FieldAccessException;
+import com.jogamp.nativewindow.util.Point;
+
+import de.thelearningtriangle.classifier.LinearDirectionClassifier;
+import de.thelearningtriangle.core.overworld.Direction;
+import de.thelearningtriangle.core.overworld.TriangleDeathException;
 import de.thelearningtriangle.core.overworld.TriangleOverworld;
 import de.thelearningtriangle.core.overworld.TriangleOverworldFactory;
 import de.thelearningtriangle.core.overworld.TrianglePosition;
@@ -12,52 +17,51 @@ import de.thelearningtriangle.opengl.core.Game;
 import de.thelearningtriangle.opengl.figure.DrawableFigure;
 import de.thelearningtriangle.opengl.figure.LearningTriangleFigure;
 
-public class Application
-{
-	
+public class Application {
+
 	static Random random = new Random(System.currentTimeMillis());
-	
-	public static void main(String[] args) throws Exception
-	{
+
+	public static void main(String[] args) throws Exception {
+		LinearDirectionClassifier classifier = new LinearDirectionClassifier();
 		Game game = new Game();
 		int size = 30;
-		
-		for (int i = 0; i < 2000; i++)
-		{
-			try
-			{
-				TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(size, random);
-				
-				for (int ix = 0; ix < 5; ix++)
-				{
-					overworld.setTriangle(overworld.getRandomSpawningPoint());
-				}
-				
-				DrawableOverworldFactory drawableOverworldFactory = new DrawableOverworldFactory();
-				List<DrawableFigure> overworldFigures = drawableOverworldFactory.getDrawableFiguresFor(overworld);
-				overworldFigures.stream().forEach(game::registerDrawableFigure);
-				
-				for (TrianglePosition position : overworld.getTrianglePositions())
-				{
-					LearningTriangleFigure triangle = new LearningTriangleFigure(
-							(position.getPoint().getX() * (1.9f / size)) - 0.95f,
-							(position.getPoint().getY() * -(1.9f / size)) + 0.95f, 1.5f / size);
-					game.registerDrawableFigure(triangle);
-				}
-				
-				game.canvas.display();
-				Thread.sleep(1000);
-				
-				overworldFigures.stream().forEach(game::unregisterDrawableFigure);
-				
-				for (DrawableFigure drawableFigure : overworldFigures)
-				{
-					game.unregisterDrawableFigure(drawableFigure);
-				}
+		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(size, random);
+		overworld.setTriangle(overworld.getRandomSpawningPoint());
+
+		DrawableOverworldFactory drawableOverworldFactory = new DrawableOverworldFactory();
+		List<DrawableFigure> overworldFigures = drawableOverworldFactory.getDrawableFiguresFor(overworld);
+		overworldFigures.stream().forEach(game::registerDrawableFigure);
+
+		while (true) {
+			TrianglePosition trianglePosition = overworld.getTrianglePositions().get(0);
+			List<Integer> vv = overworld.getVisionVectorFor(trianglePosition.getPoint());
+			Direction predicted = classifier.predict(vv.toArray(new Integer[0]));
+			overworld.moveTriangle(trianglePosition, predicted);
+			List<LearningTriangleFigure> registeredFigs = new ArrayList<LearningTriangleFigure>();
+			for (TrianglePosition position : overworld.getTrianglePositions()) {
+				LearningTriangleFigure triangle = new LearningTriangleFigure(
+						(position.getPoint().getX() * (1.9f / size)) - 0.95f,
+						(position.getPoint().getY() * -(1.9f / size)) + 0.95f,
+						1.5f / size);
+				registeredFigs.add(triangle);
+				game.registerDrawableFigure(triangle);
 			}
-			catch (FieldAccessException e)
-			{
+
+			game.canvas.display();
+			Thread.sleep(200);
+			registeredFigs.stream().forEach(game::unregisterDrawableFigure);
+			try {
+				trianglePosition.getLearningTriangle().cycle();
+				Point point = trianglePosition.getPoint();
+				System.out.printf("CurrentField: %s\n", overworld.getField(point));
+			} catch (TriangleDeathException e) {
+				overworld.getTrianglePositions().clear();
+				overworld.setTriangle(overworld.getRandomSpawningPoint());
 			}
+			System.out.printf(
+					"Energy: %s Distance: %s\n",
+					trianglePosition.getLearningTriangle().getEnergy(),
+					trianglePosition.getLearningTriangle().getDistance());
 		}
 	}
 }

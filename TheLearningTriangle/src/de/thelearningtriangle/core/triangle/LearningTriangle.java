@@ -2,97 +2,79 @@ package de.thelearningtriangle.core.triangle;
 
 import de.thelearningtriangle.core.overworld.TriangleDeathException;
 
-public class LearningTriangle
-{
+public class LearningTriangle {
 	private long totalEnergy;
 	private int consumption;
 	private int highConsumptionCycles;
 	private long distance;
-	
-	public LearningTriangle()
-	{
-		this(20);
+
+	public LearningTriangle() {
+		this(40);
 	}
-	
-	public LearningTriangle(LearningTriangle baseTriangle)
-	{
+
+	public LearningTriangle(LearningTriangle baseTriangle) {
 		this.totalEnergy = baseTriangle.totalEnergy;
 		this.consumption = baseTriangle.consumption;
 		this.highConsumptionCycles = baseTriangle.highConsumptionCycles;
 		this.distance = baseTriangle.distance;
 	}
-	
-	public LearningTriangle(int startingEnergy)
-	{
+
+	public LearningTriangle(int startingEnergy) {
 		this.totalEnergy = startingEnergy;
 		this.consumption = 1;
 		highConsumptionCycles = 0;
 	}
-	
-	public void addEnergy(long energy)
-	{
+
+	public void addEnergy(long energy) {
 		this.totalEnergy += energy;
 	}
-	
-	public long getEnergy()
-	{
+
+	public long getEnergy() {
 		return totalEnergy;
 	}
-	
-	public long getDistance()
-	{
+
+	public long getDistance() {
 		return distance;
 	}
-	
-	public void setHighConsumptionCycles(int cycles)
-	{
+
+	public void setHighConsumptionCycles(int cycles) {
 		this.highConsumptionCycles = cycles;
 	}
-	
-	public int getConsumption()
-	{
+
+	public int getConsumption() {
 		return consumption;
 	}
-	
-	public void setConsumption(int consumption)
-	{
+
+	public void setConsumption(int consumption) {
 		this.consumption = consumption;
 	}
-	
-	public int getHighConsumptionCycles()
-	{
+
+	public int getHighConsumptionCycles() {
 		return highConsumptionCycles;
 	}
-	
-	public void cycle() throws TriangleDeathException
-	{
+
+	public void cycle() throws TriangleDeathException {
 		testIfTrianlgeDies();
 		this.addEnergy(-consumption);
 		calculateConsumption();
 		distance++;
 	}
-	
-	private void calculateConsumption()
-	{
-		if (consumption > 1)
-		{
+
+	private void calculateConsumption() {
+		if (consumption > 1) {
 			calculatePoison();
 		}
 	}
-	
-	private void calculatePoison()
-	{
+
+	private void calculatePoison() {
 		highConsumptionCycles--;
-		if (highConsumptionCycles == 0)
-		{
+		if (highConsumptionCycles == 0) {
 			consumption = 1;
 		}
 	}
-	
-	private void testIfTrianlgeDies() throws TriangleDeathException
-	{
-		if (this.totalEnergy == 0)
-		{
+
+	private void testIfTrianlgeDies() throws TriangleDeathException {
+		if (this.totalEnergy <= 0) {
 			throw new TriangleDeathException();
 		}
 	}

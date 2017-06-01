@@ -14,190 +14,55 @@ import de.thelearningtriangle.core.overworld.TriangleOverworldFactory;
 import de.thelearningtriangle.core.triangle.LearningTriangle;
 import de.thelearningtriangle.qlearning.RecursiveQTriangle.TriangleMoveData;
 
-public class Train
-{
-	
-	public static void main(String[] args) throws NoMapException
-	{
-		int depth = 12;
-		new Thread(new Runnable()
-		{
+public class Train {
+	static File testFile = new File("test.csv");
+	static File trainFile = new File("train.csv");
+
+	public static Thread createRunner(File file) {
+		return new Thread(new Runnable() {
 			@Override
-			public void run()
-			{
-				File f = new File("train1.csv");
-				while (true)
-				{
-					TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(100,
-							new Random(System.currentTimeMillis()));
+			public void run() {
+				while (true) {
+					TriangleOverworld overworld = TriangleOverworldFactory
+							.generateOverworld(100, new Random(System.currentTimeMillis()));
 					Point randomSpawningPoint;
 					List<RecursiveQTriangle.TriangleMoveData> bestMoves = null;
-					try
-					{
+					try {
 						randomSpawningPoint = overworld.getRandomSpawningPoint();
 						RecursiveQTriangle qTriangle = new RecursiveQTriangle(overworld);
 						LearningTriangle triangle = new LearningTriangle();
-						bestMoves = qTriangle.calculateBestMoves(randomSpawningPoint, triangle, depth);
-					}
-					catch (NoMapException e)
-					{
+						bestMoves = qTriangle.calculateBestMoves(randomSpawningPoint, triangle, 13);
+					} catch (NoMapException e) {
 						e.printStackTrace();
 					}
 					bestMoves.remove(0);
-					System.out.println("-");
+					System.out.println("- Finished with score: " + bestMoves.get(0).getScore());
 					FileWriter writer;
-					try
-					{
-						writer = new FileWriter(f, true);
-						for (TriangleMoveData triangleMoveData : bestMoves)
-						{
-							writer.write(triangleMoveData.toString());
+					try {
+						synchronized (file) {
+							writer = new FileWriter(file, true);
+							for (int i = 0; i < 4; i++) {
+								TriangleMoveData triangleMoveData = bestMoves.get(i);
+								writer.write(triangleMoveData.toString());
+							}
+							writer.flush();
+							writer.close();
 						}
-						writer.flush();
-					}
-					catch (IOException e)
-					{
+					} catch (IOException e) {
 						e.printStackTrace();
 					}
 				}
 			}
-			
-		}).start();
-		
-		new Thread(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				File f = new File("train2.csv");
-				while (true)
-				{
-					TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(100,
-							new Random(System.currentTimeMillis()));
-					Point randomSpawningPoint;
-					List<RecursiveQTriangle.TriangleMoveData> bestMoves = null;
-					try
-					{
-						randomSpawningPoint = overworld.getRandomSpawningPoint();
-						RecursiveQTriangle qTriangle = new RecursiveQTriangle(overworld);
-						LearningTriangle triangle = new LearningTriangle();
-						bestMoves = qTriangle.calculateBestMoves(randomSpawningPoint, triangle, depth);
-					}
-					catch (NoMapException e)
-					{
-						e.printStackTrace();
-					}
-					bestMoves.remove(0);
-					System.out.println("-");
-					FileWriter writer;
-					try
-					{
-						writer = new FileWriter(f, true);
-						for (TriangleMoveData triangleMoveData : bestMoves)
-						{
-							writer.write(triangleMoveData.toString());
-						}
-						writer.flush();
-					}
-					catch (IOException e)
-					{
-						e.printStackTrace();
-					}
-				}
-				
-			}
-			
-		}).start();
-		
-		new Thread(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				File f = new File("test1.csv");
-				while (true)
-				{
-					TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(100,
-							new Random(System.currentTimeMillis()));
-					Point randomSpawningPoint;
-					List<RecursiveQTriangle.TriangleMoveData> bestMoves = null;
-					try
-					{
-						randomSpawningPoint = overworld.getRandomSpawningPoint();
-						RecursiveQTriangle qTriangle = new RecursiveQTriangle(overworld);
-						LearningTriangle triangle = new LearningTriangle();
-						bestMoves = qTriangle.calculateBestMoves(randomSpawningPoint, triangle, depth);
-					}
-					catch (NoMapException e)
-					{
-						e.printStackTrace();
-					}
-					bestMoves.remove(0);
-					System.out.println("-");
-					FileWriter writer;
-					try
-					{
-						writer = new FileWriter(f, true);
-						for (TriangleMoveData triangleMoveData : bestMoves)
-						{
-							writer.write(triangleMoveData.toString());
-						}
-						writer.flush();
-					}
-					catch (IOException e)
-					{
-						e.printStackTrace();
-					}
-				}
-				
-			}
-			
-		}).start();
-		
-		new Thread(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				File f = new File("test2.csv");
-				while (true)
-				{
-					TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(100,
-							new Random(System.currentTimeMillis()));
-					Point randomSpawningPoint;
-					List<RecursiveQTriangle.TriangleMoveData> bestMoves = null;
-					try
-					{
-						randomSpawningPoint = overworld.getRandomSpawningPoint();
-						RecursiveQTriangle qTriangle = new RecursiveQTriangle(overworld);
-						LearningTriangle triangle = new LearningTriangle();
-						bestMoves = qTriangle.calculateBestMoves(randomSpawningPoint, triangle, depth);
-					}
-					catch (NoMapException e)
-					{
-						e.printStackTrace();
-					}
-					bestMoves.remove(0);
-					System.out.println("-");
-					FileWriter writer;
-					try
-					{
-						writer = new FileWriter(f, true);
-						for (TriangleMoveData triangleMoveData : bestMoves)
-						{
-							writer.write(triangleMoveData.toString());
-						}
-						writer.flush();
-					}
-					catch (IOException e)
-					{
-						e.printStackTrace();
-					}
-				}
-				
-			}
-			
-		}).start();
+
+		});
 	}
-	
+
+	public static void main(String[] args) {
+		createRunner(trainFile).start();
+		createRunner(trainFile).start();
+
+		createRunner(testFile).start();
+		createRunner(testFile).start();
+	}
+
 }

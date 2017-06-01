@@ -9,10 +9,10 @@ import java.util.stream.Stream;
 
 public enum FieldType {
 
-	NORMAL(NormalField.class, Color.GRAY, 80, 1),
-	WALL(WallField.class, Color.BLACK, 85, 2),
-	POISON(PoisonField.class, new Color(0.8f, 0.5f, 1.f), 90, 3),
-	DEATH(DeathField.class, Color.RED, 95, 4),
+	NORMAL(NormalField.class, Color.GRAY, 70, 1),
+	WALL(WallField.class, Color.BLACK, 75, 2),
+	POISON(PoisonField.class, new Color(0.8f, 0.5f, 1.f), 80, 3),
+	DEATH(DeathField.class, Color.RED, 85, 4),
 	ENERGY(EnergyField.class, Color.YELLOW, 100, 5);
 
 	public static int MAX_CHANCE = 100;
@@ -47,8 +47,10 @@ public enum FieldType {
 	}
 
 	public static FieldType getFieldTypeFor(int randomNumber) {
-		List<FieldType> collectedFieldsSortedAndWithoutToHighFields = Arrays.stream(values())
-				.sorted((f1, f2) -> Integer.compare(f1.chance, f2.chance)).filter(field -> field.chance >= randomNumber)
+		List<FieldType> collectedFieldsSortedAndWithoutToHighFields = Arrays
+				.stream(values())
+				.sorted((f1, f2) -> Integer.compare(f1.chance, f2.chance))
+				.filter(field -> field.chance >= randomNumber)
 				.collect(Collectors.toList());
 
 		FieldType fieldType = collectedFieldsSortedAndWithoutToHighFields.get(0);
@@ -65,7 +67,11 @@ public enum FieldType {
 	}
 
 	public static int getIdFor(AbstractField field) {
-		return Stream.of(values()).filter(fielyType -> fielyType.getFieldClass().equals(field.getClass())).findFirst()
-				.get().getId();
+		return Stream
+				.of(values())
+				.filter(fielyType -> fielyType.getFieldClass().equals(field.getClass()))
+				.findFirst()
+				.get()
+				.getId();
 	}
 }

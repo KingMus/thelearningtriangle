@@ -16,8 +16,8 @@ import com.jogamp.opengl.awt.GLCanvas;
 import de.thelearningtriangle.opengl.figure.DrawableFigure;
 
 public class Game extends JFrame implements GLEventListener {
-	private static final int WINDOW_WIDTH = 700;
-	private static final int WINDOW_HEIGHT = 700;
+	private static final int WINDOW_WIDTH = 1000;
+	private static final int WINDOW_HEIGHT = 1000;
 	/**
 	 * 
 	 */
