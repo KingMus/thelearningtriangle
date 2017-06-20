@@ -1,5 +1,9 @@
 package de.thelearningtriangle.core.overworld;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public enum Direction {
 	NORTH(0, -1, 0), EAST(1, 0, 1), SOUTH(0, 1, 2), WEST(-1, 0, 3);
 
@@ -23,6 +27,12 @@ public enum Direction {
 
 	public int getLabel() {
 		return label;
+	}
+
+	public static List<Direction> getShuffledValues() {
+		List<Direction> listValues = Arrays.asList(values());
+		Collections.shuffle(listValues);
+		return listValues;
 	}
 
 	public static Direction getDirectionFor(int bestIndex) {

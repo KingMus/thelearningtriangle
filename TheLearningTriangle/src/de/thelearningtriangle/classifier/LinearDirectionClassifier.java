@@ -28,7 +28,7 @@ import de.thelearningtriangle.core.overworld.Direction;
 
 public class LinearDirectionClassifier {
 	int seed = 123;
-	double learningRate = 0.01;
+	double learningRate = 0.1;
 	int batchSize = 12000;
 	int nEpochs = 20;
 	int numInputs = 36;
@@ -46,7 +46,7 @@ public class LinearDirectionClassifier {
 
 		MultiLayerConfiguration configuration = new NeuralNetConfiguration.Builder()
 				.seed(seed)
-				.iterations(1)
+				.iterations(10)
 				.optimizationAlgo(OptimizationAlgorithm.STOCHASTIC_GRADIENT_DESCENT)
 				.learningRate(learningRate)
 				.updater(Updater.NESTEROVS)
