@@ -41,7 +41,7 @@ public class Train {
 					try {
 						synchronized (file) {
 							writer = new FileWriter(file, true);
-							for (int i = 0; i < 4; i++) {
+							for (int i = 0; i < 5; i++) {
 								TriangleMoveData triangleMoveData = bestMoves.get(i);
 								writer.write(triangleMoveData.toString());
 							}
