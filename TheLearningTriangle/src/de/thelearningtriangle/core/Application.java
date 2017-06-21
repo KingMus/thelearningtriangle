@@ -41,14 +41,13 @@ public class Application {
 			for (TrianglePosition position : overworld.getTrianglePositions()) {
 				LearningTriangleFigure triangle = new LearningTriangleFigure(
 						(position.getPoint().getX() * (1.9f / size)) - 0.95f,
-						(position.getPoint().getY() * -(1.9f / size)) + 0.95f,
-						1.5f / size);
+						(position.getPoint().getY() * -(1.9f / size)) + 0.95f, 1.5f / size);
 				registeredFigs.add(triangle);
 				game.registerDrawableFigure(triangle);
 			}
 
 			game.canvas.display();
-			Thread.sleep(200);
+			Thread.sleep(2000);
 			registeredFigs.stream().forEach(game::unregisterDrawableFigure);
 			try {
 				trianglePosition.getLearningTriangle().cycle();
@@ -58,9 +57,7 @@ public class Application {
 				overworld.getTrianglePositions().clear();
 				overworld.setTriangle(overworld.getRandomSpawningPoint());
 			}
-			System.out.printf(
-					"Energy: %s Distance: %s\n",
-					trianglePosition.getLearningTriangle().getEnergy(),
+			System.out.printf("Energy: %s Distance: %s\n", trianglePosition.getLearningTriangle().getEnergy(),
 					trianglePosition.getLearningTriangle().getDistance());
 		}
 	}

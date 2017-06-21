@@ -15,8 +15,8 @@ import de.thelearningtriangle.core.triangle.LearningTriangle;
 import de.thelearningtriangle.qlearning.RecursiveQTriangle.TriangleMoveData;
 
 public class Train {
-	static File testFile = new File("test.csv");
-	static File trainFile = new File("train.csv");
+	static File testFile = new File("test21060.csv");
+	static File trainFile = new File("train21060.csv");
 
 	public static Thread createRunner(File file) {
 		return new Thread(new Runnable() {
@@ -60,7 +60,15 @@ public class Train {
 	public static void main(String[] args) {
 		createRunner(trainFile).start();
 		createRunner(trainFile).start();
+		createRunner(trainFile).start();
+		createRunner(trainFile).start();
+		createRunner(trainFile).start();
+		createRunner(trainFile).start();
 
+		createRunner(testFile).start();
+		createRunner(testFile).start();
+		createRunner(testFile).start();
+		createRunner(testFile).start();
 		createRunner(testFile).start();
 		createRunner(testFile).start();
 	}
