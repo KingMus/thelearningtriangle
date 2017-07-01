@@ -21,7 +21,7 @@ public class DrawableOverworldFactory {
 		for (int rowNumber = 0; rowNumber < size; rowNumber++) {
 			float fieldPosY = constantBorder - ((twoConstantBorder * rowNumber) / size);
 			for (int columnNumber = 0; columnNumber < size; columnNumber++) {
-				FieldType cellFieldType = triangleOverworld.getField(rowNumber, columnNumber).getFieldType();
+				FieldType cellFieldType = triangleOverworld.getField(columnNumber, rowNumber).getFieldType();
 
 				float fieldPosX = -constantBorder + ((twoConstantBorder * columnNumber) / size);
 
