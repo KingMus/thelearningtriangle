@@ -22,6 +22,7 @@ public class Application {
 	static Random random = new Random(System.currentTimeMillis());
 
 	public static void main(String[] args) throws Exception {
+		
 		LinearDirectionClassifier classifier = new LinearDirectionClassifier();
 		Game game = new Game();
 		int size = 30;
