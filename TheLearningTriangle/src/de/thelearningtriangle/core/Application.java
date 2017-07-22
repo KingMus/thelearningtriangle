@@ -22,9 +22,9 @@ public class Application
 	public static void main(String[] args) throws Exception
 	{
 		@SuppressWarnings("unused")
-		ImageLoader imageLoader = new ImageLoader(System.getProperty("user.dir").replace('\\', '/'), "Classic");
+		ImageLoader imageLoader = new ImageLoader(System.getProperty("user.dir").replace('\\', '/'), "Steven");
 
-		int size = 16;
+		int size = 25;
 		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(size, random);
 		overworld.setTriangle(overworld.getRandomSpawningPoint());
 
