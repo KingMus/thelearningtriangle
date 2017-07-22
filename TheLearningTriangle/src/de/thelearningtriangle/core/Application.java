@@ -34,27 +34,24 @@ public class Application
 
 		while (true)
 		{
+			
 			TrianglePosition trianglePosition = overworld.getTrianglePositions().get(0);
 			List<Integer> vv = overworld.getVisionVectorFor(trianglePosition.getPoint());
 			Direction predicted = classifier.predict(vv.toArray(new Integer[0]));
 			overworld.moveTriangle(trianglePosition, predicted);
 			
-			mainW.getOverworldPanel().repaint();
-			
-			Thread.sleep(700);
 			
 			try
 			{
 				trianglePosition.getLearningTriangle().cycle();
-				Point point = trianglePosition.getPoint();
-				System.out.printf("CurrentField: %s\n", overworld.getField(point));
 			} catch (TriangleDeathException e)
 			{
 				overworld.getTrianglePositions().clear();
 				overworld.setTriangle(overworld.getRandomSpawningPoint());
 			}
-			System.out.printf("Energy: %s Distance: %s\n", trianglePosition.getLearningTriangle().getEnergy(),
-					trianglePosition.getLearningTriangle().getDistance());
+			
+			mainW.getOverworldPanel().repaint();
+			Thread.sleep(1400);
 		}
 	}
 }

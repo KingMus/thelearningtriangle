@@ -1,5 +1,6 @@
 package de.thelearningtriangle.ui;
 
+import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -43,6 +44,18 @@ public class OverworldPanel extends JPanel
 		{
 			g.drawImage(ImageLoader.triangle, trianglePosition.getPoint().getX() * 800 / size,
 					trianglePosition.getPoint().getY() * 800 / size, 800 / size, 800 / size, this);
+
+			int fontsize = 50 - size < 15 ? 15 : 50 - size;
+			Font arial = new Font("Arial", Font.BOLD, fontsize);
+			g.setFont(arial);
+
+			g.drawString(
+					trianglePosition.getLearningTriangle().getEnergy() + " | "
+							+ trianglePosition.getLearningTriangle().getDistance(),
+					(trianglePosition.getPoint().getX() * 800 / size),
+					(trianglePosition.getPoint().getY() * 800 / size) - (800 / size) / 5);
+			// Position is calculated through world size
+
 		}
 	}
 

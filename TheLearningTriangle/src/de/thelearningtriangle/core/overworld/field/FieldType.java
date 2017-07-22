@@ -12,11 +12,11 @@ import de.thelearningtriangle.ui.ImageLoader;
 
 public enum FieldType {
 
-	NORMAL(NormalField.class, Color.GRAY, ImageLoader.normalField, 70, 1),
-	WALL(WallField.class, Color.BLACK, ImageLoader.wallField, 75, 2),
-	POISON(PoisonField.class, new Color(0.8f, 0.5f, 1.f), ImageLoader.poisonField, 80, 3),
-	DEATH(DeathField.class, Color.RED, ImageLoader.deathField,85, 4),
-	ENERGY(EnergyField.class, Color.YELLOW, ImageLoader.energyField, 100, 5);
+	NORMAL(NormalField.class, ImageLoader.normalField, 70, 1),
+	WALL(WallField.class, ImageLoader.wallField, 75, 2),
+	POISON(PoisonField.class, ImageLoader.poisonField, 80, 3),
+	DEATH(DeathField.class, ImageLoader.deathField,85, 4),
+	ENERGY(EnergyField.class, ImageLoader.energyField, 100, 5);
 
 	public static int MAX_CHANCE = 100;
 	private Class<? extends AbstractField> fieldClass;
@@ -27,10 +27,9 @@ public enum FieldType {
 	private Image image;
 	private int id;
 
-	private FieldType(Class<? extends AbstractField> fieldClass, Color color, Image image, int chance, int id) {
+	private FieldType(Class<? extends AbstractField> fieldClass, Image image, int chance, int id) {
 		this.fieldClass = fieldClass;
 		this.chance = chance;
-		this.color = color;
 		this.image = image;
 		this.id = id;
 	}
