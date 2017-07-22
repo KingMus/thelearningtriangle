@@ -1,21 +1,19 @@
 package de.thelearningtriangle.ui;
 
 import java.awt.Image;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 
 public class ImageLoader
 {
-	private static String	pfad	= System.getProperty("user.dir").replace('\\', '/');
+	public static Image	energyField, deathField, normalField;
+	public static Image	wallField;
+	public static Image	poisonField;
 
-	public static Image		energyField, deathField, normalField;
-
-	public static Image		wallField;
-
-	public static Image		poisonField;
-
-	public ImageLoader()
+	public ImageLoader(String pfad)
 	{
+
 		ImageIcon energyFieldIcon = new ImageIcon(pfad + "/Images/Fields/Style-Classic_Energy_Field.png");
 		energyField = energyFieldIcon.getImage();
 		ImageIcon deathFieldIcon = new ImageIcon(pfad + "/Images/Fields/Style-Classic_Death_Field.png");
