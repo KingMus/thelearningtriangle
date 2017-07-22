@@ -16,12 +16,15 @@ import de.thelearningtriangle.opengl.core.DrawableOverworldFactory;
 import de.thelearningtriangle.opengl.core.Game;
 import de.thelearningtriangle.opengl.figure.DrawableFigure;
 import de.thelearningtriangle.opengl.figure.LearningTriangleFigure;
+import de.thelearningtriangle.ui.MainWindow;
 
 public class Application {
 
 	static Random random = new Random(System.currentTimeMillis());
 
 	public static void main(String[] args) throws Exception {
+		
+		MainWindow mainw = new MainWindow();
 		
 		LinearDirectionClassifier classifier = new LinearDirectionClassifier();
 		Game game = new Game();
