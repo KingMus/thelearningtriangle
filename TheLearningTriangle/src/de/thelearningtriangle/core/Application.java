@@ -25,7 +25,7 @@ public class Application {
 		
 		LinearDirectionClassifier classifier = new LinearDirectionClassifier();
 		Game game = new Game();
-		int size = 30;
+		int size = 20;
 		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(size, random);
 		overworld.setTriangle(overworld.getRandomSpawningPoint());
 
