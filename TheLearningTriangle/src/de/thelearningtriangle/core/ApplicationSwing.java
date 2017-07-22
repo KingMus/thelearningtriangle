@@ -23,9 +23,9 @@ public class ApplicationSwing
 
 	public static void main(String[] args) throws Exception
 	{
-		ImageLoader imageLoader = new ImageLoader(System.getProperty("user.dir").replace('\\', '/'));
+		ImageLoader imageLoader = new ImageLoader(System.getProperty("user.dir").replace('\\', '/'), "RPG");
 
-		int size = 50;
+		int size = 16;
 		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(size, random);
 		overworld.setTriangle(overworld.getRandomSpawningPoint());
 
@@ -43,14 +43,6 @@ public class ApplicationSwing
 			
 			mainW.getOverworldPanel().repaint();
 			
-//			for (TrianglePosition position : overworld.getTrianglePositions())
-//			{
-//				LearningTriangleFigure triangle = new LearningTriangleFigure(
-//						(position.getPoint().getX() * (1.9f / size)) - 0.95f,
-//						(position.getPoint().getY() * -(1.9f / size)) + 0.95f, 1.5f / size);
-//				registeredFigs.add(triangle);
-//			}
-
 			Thread.sleep(700);
 			
 			try
