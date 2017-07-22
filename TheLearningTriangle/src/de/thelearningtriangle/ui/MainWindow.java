@@ -4,10 +4,12 @@ import javax.swing.JFrame;
 
 import de.thelearningtriangle.core.overworld.TriangleOverworld;
 
+@SuppressWarnings("serial")
 public class MainWindow extends JFrame
 {
 
 	OverworldPanel overworldPanel;
+	
 
 	public MainWindow(TriangleOverworld overworld)
 	{

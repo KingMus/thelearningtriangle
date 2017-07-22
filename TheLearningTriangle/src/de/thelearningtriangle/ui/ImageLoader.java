@@ -1,8 +1,6 @@
 package de.thelearningtriangle.ui;
 
 import java.awt.Image;
-import java.io.File;
-
 import javax.swing.ImageIcon;
 
 public class ImageLoader
