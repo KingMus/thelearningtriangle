@@ -2,13 +2,17 @@ package de.thelearningtriangle.ui;
 
 import javax.swing.JFrame;
 
+import de.thelearningtriangle.core.overworld.TriangleOverworld;
+
 public class MainWindow extends JFrame
 {
 
-	OverworldPanel overworldPanel = new OverworldPanel();
-	
-	public MainWindow()
+	OverworldPanel overworldPanel;
+
+	public MainWindow(TriangleOverworld overworld)
 	{
+
+		overworldPanel = new OverworldPanel(overworld);
 
 		this.setSize(900, 900);
 		this.setLocationRelativeTo(null);

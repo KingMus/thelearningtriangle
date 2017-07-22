@@ -23,17 +23,15 @@ public class ApplicationSwing
 
 	public static void main(String[] args) throws Exception
 	{
-
-		MainWindow mainW = new MainWindow();
 		ImageLoader imageLoader = new ImageLoader(System.getProperty("user.dir").replace('\\', '/'));
 
-		LinearDirectionClassifier classifier = new LinearDirectionClassifier();
-
-		// Game game = new Game();
 		int size = 20;
-
 		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(size, random);
 		overworld.setTriangle(overworld.getRandomSpawningPoint());
+
+		MainWindow mainW = new MainWindow(overworld);
+
+		LinearDirectionClassifier classifier = new LinearDirectionClassifier();
 
 		// DrawableOverworldFactory drawableOverworldFactory = new
 		// DrawableOverworldFactory();
