@@ -1,14 +1,13 @@
 package de.thelearningtriangle.ui;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
 import de.thelearningtriangle.core.overworld.NoMapException;
 import de.thelearningtriangle.core.overworld.TriangleOverworld;
-import de.thelearningtriangle.core.overworld.field.FieldType;
-import de.thelearningtriangle.opengl.figure.DrawableFigure;
-import de.thelearningtriangle.opengl.figure.FieldFigure;
+import de.thelearningtriangle.core.overworld.TrianglePosition;
 
 public class OverworldPanel extends JPanel
 {
@@ -34,8 +33,14 @@ public class OverworldPanel extends JPanel
 				{
 
 					g.drawImage(overworld.getField(columnNumber, rowNumber).getFieldType().getImage(),
-							rowNumber * 800 / size, columnNumber * 800 / size, 800 / size, 800 / size, this);
+							columnNumber * 800 / size, rowNumber * 800 / size, 800 / size, 800 / size, this);
 				}
+			}
+
+			for (TrianglePosition trianglePosition : overworld.getTrianglePositions())
+			{
+				g.drawImage(ImageLoader.triangle, trianglePosition.getPoint().getX() * 800 / size,
+						trianglePosition.getPoint().getY() * 800 / size, 800 / size, 800 / size, this);
 			}
 
 		} catch (NoMapException e)

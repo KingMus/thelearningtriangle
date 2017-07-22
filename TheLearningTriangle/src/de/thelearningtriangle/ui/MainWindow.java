@@ -14,12 +14,17 @@ public class MainWindow extends JFrame
 
 		overworldPanel = new OverworldPanel(overworld);
 
-		this.setSize(900, 900);
+		this.setSize(806, 829);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.add(overworldPanel);
 		this.setVisible(true);
 
+	}
+
+	public OverworldPanel getOverworldPanel()
+	{
+		return overworldPanel;
 	}
 }

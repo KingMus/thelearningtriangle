@@ -25,19 +25,13 @@ public class ApplicationSwing
 	{
 		ImageLoader imageLoader = new ImageLoader(System.getProperty("user.dir").replace('\\', '/'));
 
-		int size = 20;
+		int size = 50;
 		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(size, random);
 		overworld.setTriangle(overworld.getRandomSpawningPoint());
 
 		MainWindow mainW = new MainWindow(overworld);
 
 		LinearDirectionClassifier classifier = new LinearDirectionClassifier();
-
-		// DrawableOverworldFactory drawableOverworldFactory = new
-		// DrawableOverworldFactory();
-		// List<DrawableFigure> overworldFigures =
-		// drawableOverworldFactory.getDrawableFiguresFor(overworld);
-		// overworldFigures.stream().forEach(game::registerDrawableFigure);
 
 		while (true)
 		{
@@ -46,18 +40,19 @@ public class ApplicationSwing
 			Direction predicted = classifier.predict(vv.toArray(new Integer[0]));
 			overworld.moveTriangle(trianglePosition, predicted);
 			List<LearningTriangleFigure> registeredFigs = new ArrayList<LearningTriangleFigure>();
-			for (TrianglePosition position : overworld.getTrianglePositions())
-			{
-				LearningTriangleFigure triangle = new LearningTriangleFigure(
-						(position.getPoint().getX() * (1.9f / size)) - 0.95f,
-						(position.getPoint().getY() * -(1.9f / size)) + 0.95f, 1.5f / size);
-				registeredFigs.add(triangle);
-				// game.registerDrawableFigure(triangle);
-			}
+			
+			mainW.getOverworldPanel().repaint();
+			
+//			for (TrianglePosition position : overworld.getTrianglePositions())
+//			{
+//				LearningTriangleFigure triangle = new LearningTriangleFigure(
+//						(position.getPoint().getX() * (1.9f / size)) - 0.95f,
+//						(position.getPoint().getY() * -(1.9f / size)) + 0.95f, 1.5f / size);
+//				registeredFigs.add(triangle);
+//			}
 
-			// game.canvas.display();
-			Thread.sleep(200);
-			// registeredFigs.stream().forEach(game::unregisterDrawableFigure);
+			Thread.sleep(700);
+			
 			try
 			{
 				trianglePosition.getLearningTriangle().cycle();

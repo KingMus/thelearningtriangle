@@ -10,6 +10,7 @@ public class ImageLoader
 	public static Image	energyField, deathField, normalField;
 	public static Image	wallField;
 	public static Image	poisonField;
+	public static Image	triangle;
 
 	public ImageLoader(String pfad)
 	{
@@ -24,6 +25,9 @@ public class ImageLoader
 		wallField = wallFieldIcon.getImage();
 		ImageIcon poisonFieldIcon = new ImageIcon(pfad + "/Images/Fields/Style-Classic_Poison_Field.png");
 		poisonField = poisonFieldIcon.getImage();
+		
+		ImageIcon triangleIcon = new ImageIcon(pfad + "/Images/Logos/TLT_Logo_Triangle.PNG");
+		triangle = triangleIcon.getImage();
 
 	}
 
