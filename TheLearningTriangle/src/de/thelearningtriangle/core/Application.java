@@ -3,8 +3,6 @@ package de.thelearningtriangle.core;
 import java.util.List;
 import java.util.Random;
 
-import com.jogamp.nativewindow.util.Point;
-
 import de.thelearningtriangle.classifier.LinearDirectionClassifier;
 import de.thelearningtriangle.core.overworld.Direction;
 import de.thelearningtriangle.core.overworld.TriangleDeathException;
@@ -22,9 +20,9 @@ public class Application
 	public static void main(String[] args) throws Exception
 	{
 		@SuppressWarnings("unused")
-		ImageLoader imageLoader = new ImageLoader(System.getProperty("user.dir").replace('\\', '/'), "Steven");
+		ImageLoader imageLoader = new ImageLoader(System.getProperty("user.dir").replace('\\', '/'), "Classic");
 
-		int size = 25;
+		int size = 50;
 		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(size, random);
 		overworld.setTriangle(overworld.getRandomSpawningPoint());
 
@@ -51,7 +49,7 @@ public class Application
 			}
 			
 			mainW.getOverworldPanel().repaint();
-			Thread.sleep(1400);
+			Thread.sleep(300);
 		}
 	}
 }
