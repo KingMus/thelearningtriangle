@@ -27,7 +27,7 @@ public class Application
 		overworld.setTriangle(overworld.getRandomSpawningPoint());
 
 		MainWindow mainW = new MainWindow(overworld);
-
+		
 		LinearDirectionClassifier classifier = new LinearDirectionClassifier();
 
 		while (true)

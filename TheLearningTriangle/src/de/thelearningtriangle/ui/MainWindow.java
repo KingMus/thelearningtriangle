@@ -1,5 +1,7 @@
 package de.thelearningtriangle.ui;
 
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
@@ -10,13 +12,14 @@ import de.thelearningtriangle.core.overworld.TriangleOverworld;
 public class MainWindow extends JFrame
 {
 
-	OverworldPanel overworldPanel;
-	
+	private OverworldPanel	overworldPanel;
+	private SettingsPanel	settingsPanel;
 
 	public MainWindow(TriangleOverworld overworld)
 	{
 
 		overworldPanel = new OverworldPanel(overworld);
+//		settingsPanel = new SettingsPanel();
 
 		this.setSize(806, 829);
 		this.setLocationRelativeTo(null);
