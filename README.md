@@ -1,5 +1,7 @@
 # thelearningtriangle
-The Learning Triangle is going to be a evolving simulation in an specific environment.
+The Learning Triangle uses artificial intelligence to create a evolving simulation.
+Triangles live inside an overworld and try to survive as long as possible. They are controlled through an algorithm.
+Visit https://thelearningtriangle.blogspot.de/ for more information.
 <br />
 <br />
 Maven build-configurations:<br />
