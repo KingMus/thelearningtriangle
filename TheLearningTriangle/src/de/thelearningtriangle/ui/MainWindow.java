@@ -22,6 +22,7 @@ public class MainWindow extends JFrame
 //		settingsPanel = new SettingsPanel();
 
 		this.setSize(806, 829);
+		this.setSize(406, 429);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

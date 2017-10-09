@@ -22,7 +22,7 @@ public class Application
 		@SuppressWarnings("unused")
 		ImageLoader imageLoader = new ImageLoader(System.getProperty("user.dir").replace('\\', '/'), "Classic");
 
-		int size = 50;
+		int size = 25;
 		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(size, random);
 		overworld.setTriangle(overworld.getRandomSpawningPoint());
 

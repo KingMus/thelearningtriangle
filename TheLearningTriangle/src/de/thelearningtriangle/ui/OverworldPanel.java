@@ -40,10 +40,13 @@ public class OverworldPanel extends JPanel
 
 	private void drawTriangle(Graphics g, int size)
 	{
+		
+		int windowSize = 400;
+		
 		for (TrianglePosition trianglePosition : overworld.getTrianglePositions())
 		{
-			g.drawImage(ImageLoader.triangle, trianglePosition.getPoint().getX() * 800 / size,
-					trianglePosition.getPoint().getY() * 800 / size, 800 / size, 800 / size, this);
+			g.drawImage(ImageLoader.triangle, trianglePosition.getPoint().getX() * windowSize / size,
+					trianglePosition.getPoint().getY() * windowSize / size, windowSize / size, windowSize / size, this);
 
 			int fontsize = 50 - size < 15 ? 15 : 50 - size;
 			Font arial = new Font("Arial", Font.BOLD, fontsize);
@@ -52,8 +55,8 @@ public class OverworldPanel extends JPanel
 			g.drawString(
 					trianglePosition.getLearningTriangle().getEnergy() + " | "
 							+ trianglePosition.getLearningTriangle().getDistance(),
-					(trianglePosition.getPoint().getX() * 800 / size),
-					(trianglePosition.getPoint().getY() * 800 / size) - (800 / size) / 5);
+					(trianglePosition.getPoint().getX() * windowSize / size),
+					(trianglePosition.getPoint().getY() * windowSize / size) - (windowSize / size) / 5);
 			// Position is calculated through world size
 
 		}
@@ -61,12 +64,15 @@ public class OverworldPanel extends JPanel
 
 	private void drawOverworld(Graphics g, int size) throws NoMapException
 	{
+		
+		int windowSize = 400;
+		
 		for (int rowNumber = 0; rowNumber < size; rowNumber++)
 		{
 			for (int columnNumber = 0; columnNumber < size; columnNumber++)
 			{
 				g.drawImage(overworld.getField(columnNumber, rowNumber).getFieldType().getImage(),
-						columnNumber * 800 / size, rowNumber * 800 / size, 800 / size, 800 / size, this);
+						columnNumber * windowSize / size, rowNumber * windowSize / size, windowSize / size, windowSize / size, this);
 			}
 		}
 	}
