@@ -15,14 +15,13 @@ public class MainWindow extends JFrame
 	private OverworldPanel	overworldPanel;
 	private SettingsPanel	settingsPanel;
 
-	public MainWindow(TriangleOverworld overworld)
+	public MainWindow(TriangleOverworld overworld, int windowSize)
 	{
 
-		overworldPanel = new OverworldPanel(overworld);
+		overworldPanel = new OverworldPanel(overworld, windowSize);
 //		settingsPanel = new SettingsPanel();
 
-		this.setSize(806, 829);
-		this.setSize(406, 429);
+		this.setSize(windowSize+6, windowSize+29);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

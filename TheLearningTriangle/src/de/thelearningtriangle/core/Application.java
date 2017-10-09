@@ -22,11 +22,12 @@ public class Application
 		@SuppressWarnings("unused")
 		ImageLoader imageLoader = new ImageLoader(System.getProperty("user.dir").replace('\\', '/'), "Classic");
 
-		int size = 25;
+		int size = 60;
+		int windowSize = 600;
 		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(size, random);
 		overworld.setTriangle(overworld.getRandomSpawningPoint());
 
-		MainWindow mainW = new MainWindow(overworld);
+		MainWindow mainW = new MainWindow(overworld, windowSize);
 		
 		LinearDirectionClassifier classifier = new LinearDirectionClassifier();
 

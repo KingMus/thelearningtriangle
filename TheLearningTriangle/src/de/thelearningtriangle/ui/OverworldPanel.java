@@ -13,11 +13,13 @@ import de.thelearningtriangle.core.overworld.TrianglePosition;
 public class OverworldPanel extends JPanel
 {
 
-	private TriangleOverworld overworld;
+	private TriangleOverworld	overworld;
+	private int					windowSize;
 
-	public OverworldPanel(TriangleOverworld overworld)
+	public OverworldPanel(TriangleOverworld overworld, int windowSize)
 	{
 		this.overworld = overworld;
+		this.windowSize = windowSize;
 	}
 
 	public void paint(Graphics g)
@@ -40,9 +42,7 @@ public class OverworldPanel extends JPanel
 
 	private void drawTriangle(Graphics g, int size)
 	{
-		
-		int windowSize = 400;
-		
+
 		for (TrianglePosition trianglePosition : overworld.getTrianglePositions())
 		{
 			g.drawImage(ImageLoader.triangle, trianglePosition.getPoint().getX() * windowSize / size,
@@ -64,15 +64,14 @@ public class OverworldPanel extends JPanel
 
 	private void drawOverworld(Graphics g, int size) throws NoMapException
 	{
-		
-		int windowSize = 400;
-		
+
 		for (int rowNumber = 0; rowNumber < size; rowNumber++)
 		{
 			for (int columnNumber = 0; columnNumber < size; columnNumber++)
 			{
 				g.drawImage(overworld.getField(columnNumber, rowNumber).getFieldType().getImage(),
-						columnNumber * windowSize / size, rowNumber * windowSize / size, windowSize / size, windowSize / size, this);
+						columnNumber * windowSize / size, rowNumber * windowSize / size, windowSize / size,
+						windowSize / size, this);
 			}
 		}
 	}
