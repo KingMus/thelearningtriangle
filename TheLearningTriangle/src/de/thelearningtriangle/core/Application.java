@@ -22,12 +22,13 @@ public class Application
 		@SuppressWarnings("unused")
 		ImageLoader imageLoader = new ImageLoader(System.getProperty("user.dir").replace('\\', '/'), "Classic");
 
-		int size = 23;
+		int worldSize = 58;
 		int windowSize = 600;
 		
-		windowSize = windowSize + (size-(windowSize%size));
+		//ensure that windowSite divided through worldSize is zero (necessary for UI)
+		windowSize = windowSize + (worldSize-(windowSize%worldSize));
 		
-		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(size, random);
+		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(worldSize, random);
 		overworld.setTriangle(overworld.getRandomSpawningPoint());
 
 		MainWindow mainW = new MainWindow(overworld, windowSize);

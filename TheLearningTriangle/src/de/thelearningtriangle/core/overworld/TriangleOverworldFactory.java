@@ -11,35 +11,35 @@ public class TriangleOverworldFactory
 {
 	private static Random random;
 	
-	public static TriangleOverworld generateOverworld(int size, Random random)
+	public static TriangleOverworld generateOverworld(int worldSize, Random random)
 	{
 		TriangleOverworldFactory.random = random;
 		
 		TriangleOverworld triangleOverworld = new TriangleOverworld(random);
-		triangleOverworld.setMap(generateField(size));
+		triangleOverworld.setMap(generateField(worldSize));
 		
 		return triangleOverworld;
 	}
 	
-	private static AbstractField[][] generateField(int size)
+	private static AbstractField[][] generateField(int worldSize)
 	{
-		AbstractField[][] field = generateRandomMapMatrixOf(size);
+		AbstractField[][] field = generateRandomMapMatrixOf(worldSize);
 		setBorder(field);
 		return field;
 	}
 	
-	private static AbstractField[][] generateRandomMapMatrixOf(int size)
+	private static AbstractField[][] generateRandomMapMatrixOf(int worldSize)
 	{
-		AbstractField[][] field = IntStream.range(0, size)
-				.mapToObj(unusedBuffer -> generateRandomMapVectorOf(size))
+		AbstractField[][] field = IntStream.range(0, worldSize)
+				.mapToObj(unusedBuffer -> generateRandomMapVectorOf(worldSize))
 				.collect(Collectors.toList())
 				.toArray(new AbstractField[0][0]);
 		return field;
 	}
 	
-	private static AbstractField[] generateRandomMapVectorOf(int size)
+	private static AbstractField[] generateRandomMapVectorOf(int worldSize)
 	{
-		return IntStream.range(0, size)
+		return IntStream.range(0, worldSize)
 				.mapToObj(unusedBuffer -> FieldType.getRandomFieldType(random))
 				.map(FieldType::newInstance)
 				.collect(Collectors.toList())
