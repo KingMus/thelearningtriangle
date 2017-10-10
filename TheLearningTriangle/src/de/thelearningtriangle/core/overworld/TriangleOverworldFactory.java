@@ -1,5 +1,6 @@
 package de.thelearningtriangle.core.overworld;
 
+import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -72,5 +73,47 @@ public class TriangleOverworldFactory
 			wallVector[i] = FieldType.WALL.newInstance();
 		}
 		return wallVector;
+	}
+
+	public static TriangleOverworld loadOverworld(List<String[]> mapData, Random random)
+	{
+
+		TriangleOverworldFactory.random = random;
+		
+		TriangleOverworld triangleOverworld = new TriangleOverworld(random);
+		
+		AbstractField[][] worldMap = new AbstractField[mapData.size()][mapData.size()];
+		
+		for (int i = 0; i < mapData.size(); i++)
+		{
+			for (int j = 0; j < worldMap.length; j++)
+			{
+				switch (mapData.get(i)[j])
+				{
+				case "1":
+					worldMap[i][j] = FieldType.NORMAL.newInstance();
+					break;
+				case "2":
+					worldMap[i][j] = FieldType.WALL.newInstance();
+					break;
+				case "3":
+					worldMap[i][j] = FieldType.POISON.newInstance();
+					break;
+				case "4":
+					worldMap[i][j] = FieldType.DEATH.newInstance();
+					break;
+				case "5":
+					worldMap[i][j] = FieldType.ENERGY.newInstance();
+					break;
+				default:
+					worldMap[i][j] = FieldType.POISON.newInstance();
+					break;
+				}
+			}
+		}
+		
+		triangleOverworld.setMap(worldMap);
+		
+		return triangleOverworld;
 	}
 }

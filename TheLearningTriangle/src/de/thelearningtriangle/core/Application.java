@@ -3,11 +3,14 @@ package de.thelearningtriangle.core;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 import de.thelearningtriangle.classifier.LinearDirectionClassifier;
 import de.thelearningtriangle.core.overworld.Direction;
 import de.thelearningtriangle.core.overworld.TriangleDeathException;
 import de.thelearningtriangle.core.overworld.TriangleOverworld;
 import de.thelearningtriangle.core.overworld.TriangleOverworldFactory;
+import de.thelearningtriangle.core.overworld.TriangleOverworldFileLoader;
 import de.thelearningtriangle.core.overworld.TrianglePosition;
 import de.thelearningtriangle.ui.ImageLoader;
 import de.thelearningtriangle.ui.MainWindow;
@@ -22,13 +25,17 @@ public class Application
 		@SuppressWarnings("unused")
 		ImageLoader imageLoader = new ImageLoader(System.getProperty("user.dir").replace('\\', '/'), "Classic");
 
-		int worldSize = 58;
-		int windowSize = 600;
+//		int worldSize = 13;
+		int windowSize = 900;
+		
+		List<String[]> mapData = TriangleOverworldFileLoader.parseMapFromFile();
+		TriangleOverworld overworld = TriangleOverworldFactory.loadOverworld(mapData, random);
+		int worldSize = mapData.size();
 		
 		//ensure that windowSite divided through worldSize is zero (necessary for UI)
 		windowSize = windowSize + (worldSize-(windowSize%worldSize));
 		
-		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(worldSize, random);
+//		TriangleOverworld overworld = TriangleOverworldFactory.generateOverworld(worldSize, random);
 		overworld.setTriangle(overworld.getRandomSpawningPoint());
 
 		MainWindow mainW = new MainWindow(overworld, windowSize);

@@ -10,6 +10,11 @@ public abstract class AbstractField {
 		this.fieldType = fieldType;
 	}
 
+	public void setFieldType(FieldType fieldType)
+	{
+		this.fieldType = fieldType;
+	}
+
 	public final FieldType getFieldType() {
 		return this.fieldType;
 	}
