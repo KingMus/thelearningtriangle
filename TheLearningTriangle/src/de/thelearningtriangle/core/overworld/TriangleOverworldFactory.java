@@ -12,6 +12,10 @@ public class TriangleOverworldFactory
 {
 	private static Random random;
 	
+	//variables for triangle spawnpoint
+	private static int triangleX;
+	private static int triangleY;
+	
 	public static TriangleOverworld generateOverworld(int worldSize, Random random)
 	{
 		TriangleOverworldFactory.random = random;
@@ -81,15 +85,17 @@ public class TriangleOverworldFactory
 	 * @param random
 	 * @author Marco Müller
 	 * @return an usable TriangleOverworld triangleOverworld
+	 * @throws FieldAccessException 
+	 * @throws NoMapException 
 	 */
-	public static TriangleOverworld loadOverworld(List<String[]> mapData, Random random)
+	public static TriangleOverworld loadOverworld(List<String[]> mapData, Random random) throws NoMapException, FieldAccessException
 	{
 
 		TriangleOverworldFactory.random = random;
 		
 		TriangleOverworld triangleOverworld = new TriangleOverworld(random);
 		
-		AbstractField[][] worldMap = convertStringMapToFieldMap(mapData);
+		AbstractField[][] worldMap = convertStringMapToFieldMap(triangleOverworld, mapData);
 		
 		triangleOverworld.setMap(worldMap);
 		
@@ -100,9 +106,10 @@ public class TriangleOverworldFactory
 	 * converts the String mapData into an usable map
 	 * @param mapData
 	 * @author Marco Müller
+	 * @param triangleOverworld 
 	 * @return AbstractField[][] worldMap
 	 */
-	private static AbstractField[][] convertStringMapToFieldMap(List<String[]> mapData)
+	private static AbstractField[][] convertStringMapToFieldMap(TriangleOverworld triangleOverworld, List<String[]> mapData)
 	{
 		AbstractField[][] worldMap = new AbstractField[mapData.size()][mapData.size()];
 		
@@ -112,6 +119,11 @@ public class TriangleOverworldFactory
 			{
 				switch (mapData.get(j)[i])
 				{
+				case "X":
+					triangleX = i;
+					triangleY = j;
+					worldMap[i][j] = FieldType.NORMAL.newInstance();
+					break;
 				case "1":
 					worldMap[i][j] = FieldType.NORMAL.newInstance();
 					break;
@@ -133,6 +145,17 @@ public class TriangleOverworldFactory
 				}
 			}
 		}
+		
 		return worldMap;
+	}
+
+	public static int getTriangleX()
+	{
+		return triangleX;
+	}
+
+	public static int getTriangleY()
+	{
+		return triangleY;
 	}
 }

@@ -3,8 +3,6 @@ package de.thelearningtriangle.core;
 import java.util.List;
 import java.util.Random;
 
-import javax.swing.JOptionPane;
-
 import de.thelearningtriangle.classifier.LinearDirectionClassifier;
 import de.thelearningtriangle.core.overworld.Direction;
 import de.thelearningtriangle.core.overworld.TriangleDeathException;
@@ -26,7 +24,7 @@ public class Application
 		ImageLoader imageLoader = new ImageLoader(System.getProperty("user.dir").replace('\\', '/'), "Classic");
 
 		// 1=random, 2=file
-		int mode = 1;
+		int mode = 2;
 		int worldSize = 25;
 		int windowSize = 900;
 		TriangleOverworld overworld;
@@ -34,10 +32,12 @@ public class Application
 		if (mode == 1)
 		{
 			overworld = TriangleOverworldFactory.generateOverworld(worldSize, random);
+			overworld.setTriangle(overworld.getRandomSpawningPoint());
 		} else
 		{
 			List<String[]> mapData = TriangleOverworldFileLoader.parseMapFromFile();
 			overworld = TriangleOverworldFactory.loadOverworld(mapData, random);
+			overworld.setTriangle(TriangleOverworldFactory.getTriangleX(), TriangleOverworldFactory.getTriangleY());
 			worldSize = mapData.size();
 		}
 
@@ -45,7 +45,6 @@ public class Application
 		// for UI)
 		windowSize = windowSize + (worldSize - (windowSize % worldSize));
 
-		overworld.setTriangle(overworld.getRandomSpawningPoint());
 
 		MainWindow mainW = new MainWindow(overworld, windowSize);
 
