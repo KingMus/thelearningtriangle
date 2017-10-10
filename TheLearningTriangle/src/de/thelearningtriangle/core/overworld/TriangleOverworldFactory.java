@@ -75,6 +75,13 @@ public class TriangleOverworldFactory
 		return wallVector;
 	}
 
+	/**
+	 * loads an overworld-String from an file and converts it into a map
+	 * @param mapData
+	 * @param random
+	 * @author Marco Müller
+	 * @return an usable TriangleOverworld triangleOverworld
+	 */
 	public static TriangleOverworld loadOverworld(List<String[]> mapData, Random random)
 	{
 
@@ -82,6 +89,21 @@ public class TriangleOverworldFactory
 		
 		TriangleOverworld triangleOverworld = new TriangleOverworld(random);
 		
+		AbstractField[][] worldMap = convertStringMapToFieldMap(mapData);
+		
+		triangleOverworld.setMap(worldMap);
+		
+		return triangleOverworld;
+	}
+
+	/**
+	 * converts the String mapData into an usable map
+	 * @param mapData
+	 * @author Marco Müller
+	 * @return AbstractField[][] worldMap
+	 */
+	private static AbstractField[][] convertStringMapToFieldMap(List<String[]> mapData)
+	{
 		AbstractField[][] worldMap = new AbstractField[mapData.size()][mapData.size()];
 		
 		for (int i = 0; i < mapData.size(); i++)
@@ -111,9 +133,6 @@ public class TriangleOverworldFactory
 				}
 			}
 		}
-		
-		triangleOverworld.setMap(worldMap);
-		
-		return triangleOverworld;
+		return worldMap;
 	}
 }
