@@ -88,7 +88,7 @@ public class TriangleOverworldFactory
 		{
 			for (int j = 0; j < worldMap.length; j++)
 			{
-				switch (mapData.get(i)[j])
+				switch (mapData.get(j)[i])
 				{
 				case "1":
 					worldMap[i][j] = FieldType.NORMAL.newInstance();
