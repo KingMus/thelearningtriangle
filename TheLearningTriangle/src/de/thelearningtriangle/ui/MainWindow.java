@@ -1,7 +1,5 @@
 package de.thelearningtriangle.ui;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
