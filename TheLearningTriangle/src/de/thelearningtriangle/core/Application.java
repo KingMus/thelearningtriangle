@@ -36,7 +36,7 @@ public class Application
 
 		// 1=random, 2=file
 		int mode = 1;
-		int worldSize = 90;
+		int worldSize = 25;
 		int windowSize = 600;
 		TriangleOverworld overworld;
 
@@ -52,7 +52,7 @@ public class Application
 			worldSize = mapData.size();
 		}
 
-		// ensure that windowSite divided through worldSize is zero (necessary
+		// ensure that windowSize divided through worldSize is zero (necessary
 		// for UI)
 		windowSize = windowSize + (worldSize - (windowSize % worldSize));
 

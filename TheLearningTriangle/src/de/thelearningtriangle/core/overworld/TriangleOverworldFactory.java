@@ -87,7 +87,7 @@ public class TriangleOverworldFactory
 	 * loads an overworld-String from an file and converts it into a map
 	 * @param mapData
 	 * @param random
-	 * @author Marco Müller
+	 * @author Marco Mueller
 	 * @return an usable TriangleOverworld triangleOverworld
 	 * @throws FieldAccessException 
 	 * @throws NoMapException 
@@ -109,7 +109,7 @@ public class TriangleOverworldFactory
 	/**
 	 * converts the String mapData into an usable map
 	 * @param mapData
-	 * @author Marco Müller
+	 * @author Marco Mueller
 	 * @param triangleOverworld 
 	 * @return AbstractField[][] worldMap
 	 */

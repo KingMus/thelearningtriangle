@@ -15,9 +15,11 @@ import de.thelearningtriangle.core.overworld.field.FieldType;
 public class TriangleOverworldFileLoader
 {
 
+
 	/**
-	 * This method creates a list of string arrays from a .csv-file. Values are
-	 * splitted with ";".
+	 * this method reads a file and creates a List of String-Arrays from the values
+	 * @return List<String[]>
+	 * @author Marco Mueller
 	 */
 	public static List<String[]> parseMapFromFile()
 	{
@@ -67,6 +69,11 @@ public class TriangleOverworldFileLoader
 
 	}
 
+	/**
+	 * this method creates a file from overworld data
+	 * @param worldMap
+	 * @author Marco Mueller
+	 */
 	public static void writeFileFromMap(AbstractField[][] worldMap)
 	{
 
