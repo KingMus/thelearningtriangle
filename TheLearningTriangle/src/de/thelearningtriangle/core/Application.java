@@ -20,6 +20,7 @@ import de.thelearningtriangle.ui.MainWindow;
 		-	Settings-Menu and Restart in the same application
 		-	More than one Triangle
 		-	More Fields (Spawn, Goal) (for evolutionary algorithms)
+		-	Comments and Java-Doc
 
  */
 
