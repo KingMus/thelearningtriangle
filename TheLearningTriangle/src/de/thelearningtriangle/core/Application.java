@@ -13,6 +13,16 @@ import de.thelearningtriangle.core.overworld.TrianglePosition;
 import de.thelearningtriangle.ui.ImageLoader;
 import de.thelearningtriangle.ui.MainWindow;
 
+/*TODO General: 
+	
+		-	MapBuilder
+		-	MapSaver
+		-	Settings-Menu and Restart in the same application
+		-	More than one Triangle
+		-	More Fields (Spawn, Goal) (for evolutionary algorithms)
+
+ */
+
 public class Application
 {
 
@@ -25,8 +35,8 @@ public class Application
 
 		// 1=random, 2=file
 		int mode = 2;
-		int worldSize = 25;
-		int windowSize = 500;
+		int worldSize = 20;
+		int windowSize = 600;
 		TriangleOverworld overworld;
 
 		if (mode == 1)
