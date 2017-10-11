@@ -26,7 +26,7 @@ public class Application
 		// 1=random, 2=file
 		int mode = 2;
 		int worldSize = 25;
-		int windowSize = 900;
+		int windowSize = 500;
 		TriangleOverworld overworld;
 
 		if (mode == 1)
@@ -44,7 +44,6 @@ public class Application
 		// ensure that windowSite divided through worldSize is zero (necessary
 		// for UI)
 		windowSize = windowSize + (worldSize - (windowSize % worldSize));
-
 
 		MainWindow mainW = new MainWindow(overworld, windowSize);
 
@@ -64,9 +63,16 @@ public class Application
 			} catch (TriangleDeathException e)
 			{
 				overworld.getTrianglePositions().clear();
-				overworld.setTriangle(overworld.getRandomSpawningPoint());
-			}
 
+				if (mode == 1)
+				{
+					overworld.setTriangle(overworld.getRandomSpawningPoint());
+				} else
+				{
+					overworld.setTriangle(TriangleOverworldFactory.getTriangleX(),
+							TriangleOverworldFactory.getTriangleY());
+				}
+			}
 			mainW.getOverworldPanel().repaint();
 			Thread.sleep(300);
 		}
