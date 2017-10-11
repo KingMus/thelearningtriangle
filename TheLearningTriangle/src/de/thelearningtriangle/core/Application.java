@@ -35,8 +35,8 @@ public class Application
 		ImageLoader imageLoader = new ImageLoader(System.getProperty("user.dir").replace('\\', '/'), "Classic");
 
 		// 1=random, 2=file
-		int mode = 2;
-		int worldSize = 20;
+		int mode = 1;
+		int worldSize = 90;
 		int windowSize = 600;
 		TriangleOverworld overworld;
 

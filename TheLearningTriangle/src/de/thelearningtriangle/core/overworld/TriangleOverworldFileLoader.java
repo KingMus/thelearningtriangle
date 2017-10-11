@@ -3,13 +3,18 @@ package de.thelearningtriangle.core.overworld;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.thelearningtriangle.core.overworld.field.AbstractField;
+import de.thelearningtriangle.core.overworld.field.FieldType;
+
 public class TriangleOverworldFileLoader
 {
-	
+
 	/**
 	 * This method creates a list of string arrays from a .csv-file. Values are
 	 * splitted with ";".
@@ -17,7 +22,7 @@ public class TriangleOverworldFileLoader
 	public static List<String[]> parseMapFromFile()
 	{
 
-		String file = 	System.getProperty("user.dir").replace('\\', '/')+"/MapFiles/anotherMap.txt";
+		String file = System.getProperty("user.dir").replace('\\', '/') + "/MapFiles/anotherMap.txt";
 		BufferedReader br = null;
 		String splitChar = ",";
 
@@ -61,4 +66,59 @@ public class TriangleOverworldFileLoader
 		return mapData;
 
 	}
+
+	public static void writeFileFromMap(AbstractField[][] worldMap)
+	{
+
+		PrintWriter fileWriter = null;
+
+		try
+		{
+
+			fileWriter = new PrintWriter(new FileWriter(System.getProperty("user.dir").replace('\\', '/') + "/MapFiles/savedMap"));
+
+			for (int i = 0; i < worldMap.length; i++)
+			{
+				for (int j = 0; j < worldMap.length; j++)
+				{
+					switch (worldMap[j][i].getFieldType())
+					{
+					case NORMAL:
+						fileWriter.print("1");
+						break;
+					case WALL:
+						fileWriter.print("2");
+						break;
+					case POISON:
+						fileWriter.print("3");
+						break;
+					case DEATH:
+						fileWriter.print("4");
+						break;
+					case ENERGY:
+						fileWriter.print("5");
+						break;
+					default:
+						fileWriter.print("1");
+						break;
+					}
+					
+					if(j<worldMap.length-1){
+						fileWriter.print(",");
+					}
+					
+				}
+				
+				fileWriter.println();
+			}
+
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		} finally
+		{			if (fileWriter != null)
+				fileWriter.close();
+		}
+	}
+
 }

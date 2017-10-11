@@ -21,7 +21,11 @@ public class TriangleOverworldFactory
 		TriangleOverworldFactory.random = random;
 		
 		TriangleOverworld triangleOverworld = new TriangleOverworld(random);
-		triangleOverworld.setMap(generateField(worldSize));
+		
+		AbstractField[][] worldMap = generateField(worldSize);
+		triangleOverworld.setMap(worldMap);
+		
+		TriangleOverworldFileLoader.writeFileFromMap(worldMap);
 		
 		return triangleOverworld;
 	}
