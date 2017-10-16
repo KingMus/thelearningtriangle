@@ -21,10 +21,10 @@ public class TriangleOverworldFileLoader
 	 * @return List<String[]>
 	 * @author Marco Mueller
 	 */
-	public static List<String[]> parseMapFromFile()
+	public static List<String[]> parseMapFromFile(String fileName)
 	{
 
-		String file = System.getProperty("user.dir").replace('\\', '/') + "/MapFiles/anotherMap.txt";
+		String file = System.getProperty("user.dir").replace('\\', '/') + "/MapFiles/"+fileName;
 		BufferedReader br = null;
 		String splitChar = ",";
 

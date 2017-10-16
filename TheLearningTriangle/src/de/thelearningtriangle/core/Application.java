@@ -3,6 +3,8 @@ package de.thelearningtriangle.core;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 import de.thelearningtriangle.classifier.LinearDirectionClassifier;
 import de.thelearningtriangle.core.overworld.Direction;
 import de.thelearningtriangle.core.overworld.TriangleDeathException;
@@ -34,27 +36,32 @@ public class Application
 		@SuppressWarnings("unused")
 		ImageLoader imageLoader = new ImageLoader(System.getProperty("user.dir").replace('\\', '/'), "Classic");
 
-		// 1=random, 2=file
-		int mode = 1;
-		int worldSize = 25;
-		int windowSize = 600;
+		// some variables to set
+		boolean readFromFile = true;
+		int worldSize = 100;
+		int windowSize = 900;
+		int threadTime = 300;
+		
+		
 		TriangleOverworld overworld;
 
-		if (mode == 1)
+		if (readFromFile == false)
 		{
 			overworld = TriangleOverworldFactory.generateOverworld(worldSize, random);
 			overworld.setTriangle(overworld.getRandomSpawningPoint());
 		} else
 		{
-			List<String[]> mapData = TriangleOverworldFileLoader.parseMapFromFile();
+			String fileName = JOptionPane.showInputDialog("Dateiname bitte:");
+			List<String[]> mapData = TriangleOverworldFileLoader.parseMapFromFile(fileName);
 			overworld = TriangleOverworldFactory.loadOverworld(mapData, random);
 			overworld.setTriangle(TriangleOverworldFactory.getTriangleX(), TriangleOverworldFactory.getTriangleY());
 			worldSize = mapData.size();
 		}
 
-		// ensure that windowSize divided through worldSize is zero (necessary
-		// for UI)
-		windowSize = windowSize + (worldSize - (windowSize % worldSize));
+		// ensure that windowSize divided through worldSize is even (necessary
+		// for UI). If it is, keep everything the same. If it is not, make it
+		// even
+		windowSize = windowSize % worldSize == 0 ? windowSize : windowSize + (worldSize - (windowSize % worldSize));
 
 		MainWindow mainW = new MainWindow(overworld, windowSize);
 
@@ -75,7 +82,7 @@ public class Application
 			{
 				overworld.getTrianglePositions().clear();
 
-				if (mode == 1)
+				if (readFromFile == false)
 				{
 					overworld.setTriangle(overworld.getRandomSpawningPoint());
 				} else
@@ -85,7 +92,7 @@ public class Application
 				}
 			}
 			mainW.getOverworldPanel().repaint();
-			Thread.sleep(300);
+			Thread.sleep(threadTime);
 		}
 	}
 }

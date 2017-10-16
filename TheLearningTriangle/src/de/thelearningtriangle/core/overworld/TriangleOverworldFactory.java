@@ -123,7 +123,7 @@ public class TriangleOverworldFactory
 			{
 				switch (mapData.get(j)[i])
 				{
-				case "X":
+				case "9":
 					triangleX = i;
 					triangleY = j;
 					worldMap[i][j] = FieldType.NORMAL.newInstance();
