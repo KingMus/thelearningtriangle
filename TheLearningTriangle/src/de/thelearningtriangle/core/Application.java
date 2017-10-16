@@ -53,7 +53,7 @@ public class Application
 		{
 			String fileName = JOptionPane.showInputDialog("Dateiname bitte:");
 			List<String[]> mapData = TriangleOverworldFileLoader.parseMapFromFile(fileName);
-			overworld = TriangleOverworldFactory.loadOverworld(mapData, random);
+			overworld = TriangleOverworldFactory.loadOverworld(mapData);
 			overworld.setTriangle(TriangleOverworldFactory.getTriangleX(), TriangleOverworldFactory.getTriangleY());
 			worldSize = mapData.size();
 		}

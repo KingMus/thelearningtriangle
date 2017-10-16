@@ -9,7 +9,7 @@ public class LearningTriangle {
 	private long distance;
 
 	public LearningTriangle() {
-		this(40);
+		this(10);
 	}
 
 	public LearningTriangle(LearningTriangle baseTriangle) {

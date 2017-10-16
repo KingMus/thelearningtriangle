@@ -3,7 +3,7 @@ package de.thelearningtriangle.core.overworld.field;
 import de.thelearningtriangle.core.triangle.LearningTriangle;
 
 public class EnergyField extends AbstractField {
-	public Integer energy = 25;
+	public Integer energy = 10;
 
 	public EnergyField() {
 		super(FieldType.ENERGY);

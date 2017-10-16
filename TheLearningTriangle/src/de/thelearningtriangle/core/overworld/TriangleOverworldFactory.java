@@ -92,11 +92,9 @@ public class TriangleOverworldFactory
 	 * @throws FieldAccessException 
 	 * @throws NoMapException 
 	 */
-	public static TriangleOverworld loadOverworld(List<String[]> mapData, Random random) throws NoMapException, FieldAccessException
+	public static TriangleOverworld loadOverworld(List<String[]> mapData) throws NoMapException, FieldAccessException
 	{
 
-		TriangleOverworldFactory.random = random;
-		
 		TriangleOverworld triangleOverworld = new TriangleOverworld(random);
 		
 		AbstractField[][] worldMap = convertStringMapToFieldMap(triangleOverworld, mapData);
