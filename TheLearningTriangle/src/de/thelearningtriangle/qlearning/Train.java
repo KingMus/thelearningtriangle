@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.JFileChooser;
+
 import com.jogamp.nativewindow.util.Point;
 
 import de.thelearningtriangle.core.overworld.FieldAccessException;
@@ -21,7 +23,7 @@ public class Train
 	static File	testFile	= new File("test.csv");
 	static File	trainFile	= new File("train.csv");
 
-	public static Thread createRunner(File file)
+	public static Thread createRunner(File algorithmFile, File inputFile)
 	{
 		return new Thread(new Runnable()
 		{
@@ -31,7 +33,7 @@ public class Train
 				while (true)
 				{
 
-					List<String[]> mapData = TriangleOverworldFileLoader.parseMapFromFile("WayOne");
+					List<String[]> mapData = TriangleOverworldFileLoader.parseMapFromFile(inputFile);
 					TriangleOverworld overworld;
 					try
 					{
@@ -47,9 +49,9 @@ public class Train
 						System.out.println("- Finished with score: " + bestMoves.get(0).getScore());
 						FileWriter writer;
 						
-						synchronized (file)
+						synchronized (algorithmFile)
 						{
-							writer = new FileWriter(file, true);
+							writer = new FileWriter(algorithmFile, true);
 							for (int i = 0; i < 5; i++)
 							{
 								TriangleMoveData triangleMoveData = bestMoves.get(i);
@@ -70,19 +72,24 @@ public class Train
 
 	public static void main(String[] args)
 	{
-		createRunner(trainFile).start();
-		createRunner(trainFile).start();
-		createRunner(trainFile).start();
-		createRunner(trainFile).start();
-		createRunner(trainFile).start();
-		createRunner(trainFile).start();
+		JFileChooser fc = new JFileChooser();
+		fc.showOpenDialog(null);
+		
+		File inputFile = fc.getSelectedFile();
+		
+		createRunner(trainFile, inputFile).start();
+		createRunner(trainFile, inputFile).start();
+		createRunner(trainFile, inputFile).start();
+		createRunner(trainFile, inputFile).start();
+		createRunner(trainFile, inputFile).start();
+		createRunner(trainFile, inputFile).start();
 
-		createRunner(testFile).start();
-		createRunner(testFile).start();
-		createRunner(testFile).start();
-		createRunner(testFile).start();
-		createRunner(testFile).start();
-		createRunner(testFile).start();
+		createRunner(testFile, inputFile).start();
+		createRunner(testFile, inputFile).start();
+		createRunner(testFile, inputFile).start();
+		createRunner(testFile, inputFile).start();
+		createRunner(testFile, inputFile).start();
+		createRunner(testFile, inputFile).start();
 	}
 
 }

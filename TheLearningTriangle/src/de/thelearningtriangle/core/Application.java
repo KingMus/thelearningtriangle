@@ -3,6 +3,7 @@ package de.thelearningtriangle.core;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import de.thelearningtriangle.classifier.LinearDirectionClassifier;
@@ -37,22 +38,25 @@ public class Application
 		ImageLoader imageLoader = new ImageLoader(System.getProperty("user.dir").replace('\\', '/'), "Classic");
 
 		// some variables to set
-		boolean readFromFile = true;
-		int worldSize = 100;
+		int mode = defineMode();
+		int worldSize;
 		int windowSize = 900;
 		int threadTime = 300;
 		
 		
 		TriangleOverworld overworld;
 
-		if (readFromFile == false)
+		if (mode == 0)
 		{
+			worldSize = Integer.parseInt(JOptionPane.showInputDialog("Size of Map:"));
 			overworld = TriangleOverworldFactory.generateOverworld(worldSize, random);
 			overworld.setTriangle(overworld.getRandomSpawningPoint());
 		} else
 		{
-			String fileName = JOptionPane.showInputDialog("Dateiname bitte:");
-			List<String[]> mapData = TriangleOverworldFileLoader.parseMapFromFile(fileName);
+			JFileChooser fc = new JFileChooser();
+			fc.showOpenDialog(null);
+			
+			List<String[]> mapData = TriangleOverworldFileLoader.parseMapFromFile(fc.getSelectedFile());
 			overworld = TriangleOverworldFactory.loadOverworld(mapData);
 			overworld.setTriangle(TriangleOverworldFactory.getTriangleX(), TriangleOverworldFactory.getTriangleY());
 			worldSize = mapData.size();
@@ -82,7 +86,7 @@ public class Application
 			{
 				overworld.getTrianglePositions().clear();
 
-				if (readFromFile == false)
+				if (mode == 0)
 				{
 					overworld.setTriangle(overworld.getRandomSpawningPoint());
 				} else
@@ -95,4 +99,13 @@ public class Application
 			Thread.sleep(threadTime);
 		}
 	}
+	
+	private static int defineMode() {
+		Object[] options = { "Random!", "Load..." };
+		return JOptionPane.showOptionDialog(null, "Random map or load map?", "TLT",
+				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // do not use a custom Icon
+				options, // the titles of buttons
+				options[0]);
+	}
+	
 }

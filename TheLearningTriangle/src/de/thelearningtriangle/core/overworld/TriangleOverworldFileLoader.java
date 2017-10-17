@@ -1,6 +1,7 @@
 package de.thelearningtriangle.core.overworld;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -21,10 +22,9 @@ public class TriangleOverworldFileLoader
 	 * @return List<String[]>
 	 * @author Marco Mueller
 	 */
-	public static List<String[]> parseMapFromFile(String fileName)
+	public static List<String[]> parseMapFromFile(File file)
 	{
 
-		String file = System.getProperty("user.dir").replace('\\', '/') + "/MapFiles/"+fileName;
 		BufferedReader br = null;
 		String splitChar = ",";
 

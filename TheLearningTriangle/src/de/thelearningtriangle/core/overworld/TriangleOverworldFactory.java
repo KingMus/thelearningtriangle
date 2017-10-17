@@ -25,7 +25,7 @@ public class TriangleOverworldFactory
 		AbstractField[][] worldMap = generateField(worldSize);
 		triangleOverworld.setMap(worldMap);
 		
-		TriangleOverworldFileLoader.writeFileFromMap(worldMap);
+//		TriangleOverworldFileLoader.writeFileFromMap(worldMap);
 		
 		return triangleOverworld;
 	}
