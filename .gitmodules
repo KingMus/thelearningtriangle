@@ -1,0 +1,3 @@
+[submodule "thelearningtriangle-mapbuilder"]
+	path = thelearningtriangle-mapbuilder
+	url = git://github.com/KingMus/thelearningtriangle-mapbuilder.git
