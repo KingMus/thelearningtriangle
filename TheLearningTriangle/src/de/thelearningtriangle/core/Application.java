@@ -6,7 +6,6 @@ import java.util.Random;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
-import de.thelearningtriangle.classifier.LinearDirectionClassifier;
 import de.thelearningtriangle.core.overworld.Direction;
 import de.thelearningtriangle.core.overworld.TriangleDeathException;
 import de.thelearningtriangle.core.overworld.TriangleOverworld;
@@ -69,15 +68,13 @@ public class Application
 
 		MainWindow mainW = new MainWindow(overworld, windowSize);
 
-		LinearDirectionClassifier classifier = new LinearDirectionClassifier();
 
 		while (true)
 		{
 
 			TrianglePosition trianglePosition = overworld.getTrianglePositions().get(0);
 			List<Integer> vv = overworld.getVisionVectorFor(trianglePosition.getPoint());
-			Direction predicted = classifier.predict(vv.toArray(new Integer[0]));
-			overworld.moveTriangle(trianglePosition, predicted);
+			overworld.moveTriangle(trianglePosition, Direction.SOUTH);
 
 			try
 			{
