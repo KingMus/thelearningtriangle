@@ -23,7 +23,7 @@ public class MainWindow extends JFrame
 
 		drawController = new DrawController();
 		
-		windowSize = drawController.defineWindowSize(overworld, windowSize);
+		windowSize = drawController.calculateWindowSize(overworld, windowSize);
 		
 		
 		overworldPanel = new OverworldPanel(overworld, windowSize);

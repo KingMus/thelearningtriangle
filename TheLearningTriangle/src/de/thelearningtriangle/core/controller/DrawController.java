@@ -14,7 +14,7 @@ public class DrawController {
 	 * @author Marco Mueller
 	 * @return the new windowSize
 	 */
-	public int defineWindowSize(TriangleOverworld overworld, int windowSize) {
+	public int calculateWindowSize(TriangleOverworld overworld, int windowSize) {
 		try {
 			windowSize = windowSize % overworld.getSize() == 0 ? windowSize
 					: windowSize + (overworld.getSize() - (windowSize % overworld.getSize()));
