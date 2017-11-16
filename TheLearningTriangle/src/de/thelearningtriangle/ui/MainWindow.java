@@ -5,8 +5,8 @@ import java.awt.GridLayout;
 import javax.swing.JFrame;
 
 import de.thelearningtriangle.core.controller.DrawController;
-import de.thelearningtriangle.core.overworld.NoMapException;
-import de.thelearningtriangle.core.overworld.TriangleOverworld;
+import de.thelearningtriangle.core.exceptions.NoMapException;
+import de.thelearningtriangle.core.model.overworld.TriangleOverworld;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame

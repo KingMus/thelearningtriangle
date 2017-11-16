@@ -1,6 +1,6 @@
-package de.thelearningtriangle.core.triangle;
+package de.thelearningtriangle.core.model.triangle;
 
-import de.thelearningtriangle.core.overworld.TriangleDeathException;
+import de.thelearningtriangle.core.exceptions.TriangleDeathException;
 
 public class LearningTriangle {
 	private long totalEnergy;

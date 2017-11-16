@@ -1,7 +1,7 @@
 package de.thelearningtriangle.core.controller;
 
-import de.thelearningtriangle.core.overworld.NoMapException;
-import de.thelearningtriangle.core.overworld.TriangleOverworld;
+import de.thelearningtriangle.core.exceptions.NoMapException;
+import de.thelearningtriangle.core.model.overworld.TriangleOverworld;
 
 public class DrawController {
 

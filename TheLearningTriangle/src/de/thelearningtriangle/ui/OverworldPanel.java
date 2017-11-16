@@ -5,9 +5,9 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
-import de.thelearningtriangle.core.overworld.NoMapException;
-import de.thelearningtriangle.core.overworld.TriangleOverworld;
-import de.thelearningtriangle.core.overworld.TrianglePosition;
+import de.thelearningtriangle.core.exceptions.NoMapException;
+import de.thelearningtriangle.core.model.overworld.TriangleOverworld;
+import de.thelearningtriangle.core.model.triangle.TrianglePosition;
 
 @SuppressWarnings("serial")
 public class OverworldPanel extends JPanel

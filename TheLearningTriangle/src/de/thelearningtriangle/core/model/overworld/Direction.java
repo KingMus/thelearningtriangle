@@ -1,4 +1,4 @@
-package de.thelearningtriangle.core.overworld;
+package de.thelearningtriangle.core.model.overworld;
 
 import java.util.Arrays;
 import java.util.Collections;

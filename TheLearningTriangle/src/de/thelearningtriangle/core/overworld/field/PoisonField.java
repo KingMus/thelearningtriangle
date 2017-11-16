@@ -1,6 +1,6 @@
 package de.thelearningtriangle.core.overworld.field;
 
-import de.thelearningtriangle.core.triangle.LearningTriangle;
+import de.thelearningtriangle.core.model.triangle.LearningTriangle;
 
 public class PoisonField extends AbstractField {
 	public static final Integer consumption = 3; // can be changed

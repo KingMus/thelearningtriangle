@@ -1,8 +1,6 @@
-package de.thelearningtriangle.core.overworld;
+package de.thelearningtriangle.core.model.triangle;
 
 import com.jogamp.nativewindow.util.Point;
-
-import de.thelearningtriangle.core.triangle.LearningTriangle;
 
 public class TrianglePosition {
 	private final Point point;

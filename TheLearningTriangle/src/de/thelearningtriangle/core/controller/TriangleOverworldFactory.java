@@ -1,10 +1,16 @@
-package de.thelearningtriangle.core.overworld;
+package de.thelearningtriangle.core.controller;
 
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
+import de.thelearningtriangle.core.exceptions.FieldAccessException;
+import de.thelearningtriangle.core.exceptions.NoMapException;
+import de.thelearningtriangle.core.model.overworld.TriangleOverworld;
 import de.thelearningtriangle.core.overworld.field.AbstractField;
 import de.thelearningtriangle.core.overworld.field.FieldType;
 
@@ -15,6 +21,38 @@ public class TriangleOverworldFactory
 	//variables for triangle spawnpoint
 	private static int triangleX;
 	private static int triangleY;
+	
+	private static int mode = defineMode();
+	
+	private static int defineMode() {
+		Object[] options = { "Random!", "Load..." };
+		return JOptionPane.showOptionDialog(null, "Random map or load map?", "TLT",
+				JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, // do not use a custom Icon
+				options, // the titles of buttons
+				options[0]);
+	}
+	
+	public static TriangleOverworld getOverworldMap() throws NoMapException, FieldAccessException {
+		int worldSize;
+		TriangleOverworld overworld;
+		if (mode == 0)
+		{
+			worldSize = Integer.parseInt(JOptionPane.showInputDialog("Size of Map:"));
+			overworld = TriangleOverworldFactory.generateOverworld(worldSize, random);
+			overworld.setTriangle(overworld.getRandomSpawningPoint());
+		} else
+		{
+			JFileChooser fc = new JFileChooser();
+			fc.showOpenDialog(null);
+			
+			List<String[]> mapData = TriangleOverworldFileLoader.parseMapFromFile(fc.getSelectedFile());
+			overworld = TriangleOverworldFactory.loadOverworld(mapData);
+			overworld.setTriangle(TriangleOverworldFactory.getTriangleX(), TriangleOverworldFactory.getTriangleY());
+			worldSize = mapData.size();
+		}
+		return overworld;
+	}
+	
 	
 	public static TriangleOverworld generateOverworld(int worldSize, Random random)
 	{
@@ -159,5 +197,9 @@ public class TriangleOverworldFactory
 	public static int getTriangleY()
 	{
 		return triangleY;
+	}
+
+	public static int getMode() {
+		return mode;
 	}
 }

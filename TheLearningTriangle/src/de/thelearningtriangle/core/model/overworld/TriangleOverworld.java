@@ -1,4 +1,4 @@
-package de.thelearningtriangle.core.overworld;
+package de.thelearningtriangle.core.model.overworld;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -8,11 +8,14 @@ import java.util.Random;
 
 import com.jogamp.nativewindow.util.Point;
 
+import de.thelearningtriangle.core.exceptions.FieldAccessException;
+import de.thelearningtriangle.core.exceptions.NoMapException;
+import de.thelearningtriangle.core.model.triangle.LearningTriangle;
+import de.thelearningtriangle.core.model.triangle.TrianglePosition;
 import de.thelearningtriangle.core.overworld.field.AbstractField;
 import de.thelearningtriangle.core.overworld.field.DeathField;
 import de.thelearningtriangle.core.overworld.field.FieldType;
 import de.thelearningtriangle.core.overworld.field.WallField;
-import de.thelearningtriangle.core.triangle.LearningTriangle;
 
 public class TriangleOverworld {
 

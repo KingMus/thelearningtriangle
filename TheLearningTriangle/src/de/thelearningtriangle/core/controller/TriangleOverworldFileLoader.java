@@ -1,4 +1,4 @@
-package de.thelearningtriangle.core.overworld;
+package de.thelearningtriangle.core.controller;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -1,4 +1,4 @@
-package de.thelearningtriangle.core.overworld;
+package de.thelearningtriangle.core.exceptions;
 
 public class TriangleDeathException extends Exception
 {

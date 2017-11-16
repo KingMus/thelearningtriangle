@@ -1,6 +1,6 @@
 package de.thelearningtriangle.core.overworld.field;
 
-import de.thelearningtriangle.core.triangle.LearningTriangle;
+import de.thelearningtriangle.core.model.triangle.LearningTriangle;
 
 public class DeathField extends AbstractField
 {
