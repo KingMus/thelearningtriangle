@@ -7,6 +7,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import de.thelearningtriangle.core.overworld.Direction;
+import de.thelearningtriangle.core.overworld.FieldAccessException;
+import de.thelearningtriangle.core.overworld.NoMapException;
 import de.thelearningtriangle.core.overworld.TriangleDeathException;
 import de.thelearningtriangle.core.overworld.TriangleOverworld;
 import de.thelearningtriangle.core.overworld.TriangleOverworldFactory;
@@ -17,12 +19,8 @@ import de.thelearningtriangle.ui.MainWindow;
 
 /*TODO General: 
 	
-		-	MapBuilder
-		-	MapSaver
 		-	Settings-Menu and Restart in the same application
 		-	More than one Triangle
-		-	More Fields (Spawn, Goal) (for evolutionary algorithms)
-		-	Comments and Java-Doc
 
  */
 
@@ -39,7 +37,7 @@ public class Application
 		// some variables to set
 		int mode = defineMode();
 		int worldSize;
-		int windowSize = 900;
+		
 		int threadTime = 300;
 		
 		
@@ -61,12 +59,9 @@ public class Application
 			worldSize = mapData.size();
 		}
 
-		// ensure that windowSize divided through worldSize is even (necessary
-		// for UI). If it is, keep everything the same. If it is not, make it
-		// even
-		windowSize = windowSize % worldSize == 0 ? windowSize : windowSize + (worldSize - (windowSize % worldSize));
+		
 
-		MainWindow mainW = new MainWindow(overworld, windowSize);
+		MainWindow mainW = new MainWindow(overworld);
 
 
 		while (true)
@@ -81,19 +76,24 @@ public class Application
 				trianglePosition.getLearningTriangle().cycle();
 			} catch (TriangleDeathException e)
 			{
-				overworld.getTrianglePositions().clear();
-
-				if (mode == 0)
-				{
-					overworld.setTriangle(overworld.getRandomSpawningPoint());
-				} else
-				{
-					overworld.setTriangle(TriangleOverworldFactory.getTriangleX(),
-							TriangleOverworldFactory.getTriangleY());
-				}
+				setNewTrianlgeSpawnPoint(mode, overworld);
 			}
 			mainW.getOverworldPanel().repaint();
 			Thread.sleep(threadTime);
+		}
+	}
+
+	private static void setNewTrianlgeSpawnPoint(int mode, TriangleOverworld overworld)
+			throws NoMapException, FieldAccessException {
+		overworld.getTrianglePositions().clear();
+
+		if (mode == 0)
+		{
+			overworld.setTriangle(overworld.getRandomSpawningPoint());
+		} else
+		{
+			overworld.setTriangle(TriangleOverworldFactory.getTriangleX(),
+					TriangleOverworldFactory.getTriangleY());
 		}
 	}
 	

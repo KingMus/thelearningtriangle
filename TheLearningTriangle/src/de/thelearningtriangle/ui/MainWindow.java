@@ -4,6 +4,8 @@ import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 
+import de.thelearningtriangle.core.controller.DrawController;
+import de.thelearningtriangle.core.overworld.NoMapException;
 import de.thelearningtriangle.core.overworld.TriangleOverworld;
 
 @SuppressWarnings("serial")
@@ -12,10 +14,18 @@ public class MainWindow extends JFrame
 
 	private OverworldPanel	overworldPanel;
 	private SettingsPanel	settingsPanel;
+	private DrawController drawController;
+	
+	private int windowSize = 900;
 
-	public MainWindow(TriangleOverworld overworld, int windowSize)
+	public MainWindow(TriangleOverworld overworld)
 	{
 
+		drawController = new DrawController();
+		
+		windowSize = drawController.defineWindowSize(overworld, windowSize);
+		
+		
 		overworldPanel = new OverworldPanel(overworld, windowSize);
 //		settingsPanel = new SettingsPanel();
 
@@ -28,6 +38,15 @@ public class MainWindow extends JFrame
 		this.add(overworldPanel);
 		this.setVisible(true);
 
+	}
+
+
+	public int getWindowSize() {
+		return windowSize;
+	}
+
+	public void setWindowSize(int windowSize) {
+		this.windowSize = windowSize;
 	}
 
 	public OverworldPanel getOverworldPanel()
