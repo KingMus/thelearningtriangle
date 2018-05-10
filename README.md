@@ -30,18 +30,14 @@ After the software-engineering class, all students have to work on a seminar pap
 
 During the whole development of TLT the creation of maps was an important task. For this reason a map builder was created, without another use than building overworlds in an easy way. You can find it ([HERE](https://github.com/KingMus/thelearningtriangle-mapbuilder)), it has no relation to a given task.
 
-### Maven
+### Braches
 
-old Maven build-configurations (for software-engineering part of TLT), they don't work for sure: <br />
+All Branches are out of date. Master-branch is the actual important branch.
 
-| For compiling the project with all dependencies: | |
-| ------: | :------ |
-| Name | LearningTriangleCleanCompile |
-| Base directory | ${workspace_loc:/TheLearningTriangle} |
-| Goals | clean test compile assembly:single |
+### Important Links
 
-| For running the applications tests: | |
-| ------: | :------ |
-| Name | TheLearningTriangle |
-| Base directory | ${workspace_loc:/TheLearningTriangle} |
-| Goals | install |
+* [MapBuilder](https://github.com/KingMus/thelearningtriangle-mapbuilder)
+* [Documents](https://github.com/KingMus/thelearningtriangle-studienarbeit)
+* [Project Blog](https://thelearningtriangle.blogspot.de/)
+* [YouTrack-Dashboard](https://thelearningtriangle.myjetbrains.com/youtrack/dashboard?id=803a6eca-53aa-4029-97e6-54c81d4d200a)
+* [Overleaf](https://www.overleaf.com/read/mjzjqdfzgjfv)
