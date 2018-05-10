@@ -30,7 +30,7 @@ After the software-engineering class, all students have to work on a seminar pap
 
 During the whole development of TLT the creation of maps was an important task. For this reason a map builder was created, without another use than building overworlds in an easy way. You can find it ([HERE](https://github.com/KingMus/thelearningtriangle-mapbuilder)), it has no relation to a given task.
 
-### Braches
+### Branches
 
 All Branches are out of date. Master-branch is the actual important branch.
 
