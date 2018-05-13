@@ -1,6 +1,0 @@
-[submodule "thelearningtriangle-mapbuilder"]
-	path = thelearningtriangle-mapbuilder
-	url = git://github.com/KingMus/thelearningtriangle-mapbuilder.git
-[submodule "thelearningtriangle-studienarbeit"]
-	path = thelearningtriangle-studienarbeit
-	url = git://github.com/KingMus/thelearningtriangle-studienarbeit.git
