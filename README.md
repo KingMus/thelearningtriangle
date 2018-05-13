@@ -15,12 +15,14 @@ Afterwards, this main idea was developed into an educational game for the topic 
 ## The two functions of TLT
 
 ### "Software-Engineering"-TLT (the Simulation)
+##### Oct. 2016 - April 2017
 
-While developing the simulation for software engineering class, we had to create a lot of important documents. They are stored in an own repository ([HERE](https://github.com/KingMus/thelearningtriangle-studienarbeit/tree/master/Software-Engineering)). Also we had to write a blog. Visit this [blog](https://thelearningtriangle.blogspot.de/) for more information about the documents we created.
+While developing the simulation for software engineering class, we had to create a lot of important documents. They are stored in an own repository ([HERE](https://github.com/KingMus/thelearningtriangle-studienarbeit/tree/master/fuer_SoftwareEngineering)). Also we had to write a blog. Visit this [blog](https://thelearningtriangle.blogspot.de/) for more information about the documents we created.
 
 ### "Seminar-Paper"-TLT (the Edcuational Game)
+##### Oct. 2017 - May 2018
 
-After the software-engineering class, all students have to work on a seminar paper. The decision was to use the existing idea and codebase of TLT to create an educational game for Artificial Intelligence. This was realised in Unity. Also we had to wrote a documentation. Check it out ([HERE](https://github.com/KingMus/thelearningtriangle-studienarbeit)). 
+After the software-engineering class, all students have to work on a seminar paper. The decision was to use the existing idea and codebase of TLT to create an educational game for Artificial Intelligence. This was realised in Unity. Also we had to wrote a documentation. Check it out ([HERE](https://github.com/KingMus/thelearningtriangle-studienarbeit/tree/master/fuer_Studienarbeit)). 
 
 <hr>
 
@@ -32,12 +34,12 @@ During the whole development of TLT the creation of maps was an important task. 
 
 ### Branches
 
-All Branches are out of date. Master-branch is the actual important branch.
+All other branches are out of date. Master-branch is the actual important branch.
 
 ### Important Links
 
-* [MapBuilder](https://github.com/KingMus/thelearningtriangle-mapbuilder)
 * [Documents](https://github.com/KingMus/thelearningtriangle-studienarbeit)
 * [Project Blog](https://thelearningtriangle.blogspot.de/)
 * [YouTrack-Dashboard](https://thelearningtriangle.myjetbrains.com/youtrack/dashboard?id=803a6eca-53aa-4029-97e6-54c81d4d200a)
 * [Overleaf](https://www.overleaf.com/read/mjzjqdfzgjfv)
+* [MapBuilder](https://github.com/KingMus/thelearningtriangle-mapbuilder)
