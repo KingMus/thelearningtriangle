@@ -2,7 +2,7 @@
 
 The Learning Triangle is a project that was developed during the Study of Applied Computer Science. It's mainly about artificial intelligence.
 
-![logo](https://github.com/KingMus/thelearningtriangle/blob/master/TheLearningTriangle/Images/Logos/TLT_Logo_Full.png)
+![logo](https://github.com/KingMus/thelearningtriangle-studienarbeit/blob/master/fuer_SoftwareEngineering/Images/Logos/TLT_Logo_Full.png)
 
 <hr>
 
